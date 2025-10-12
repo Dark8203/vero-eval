@@ -1,0 +1,27 @@
+{
+  "id": "metrics/generation/bleurtscore",
+  "title": "BleurtScore",
+  "description": "An advanced metric based on BLEURT that produces a more nuanced weighted similarity score.",
+  "source": "@site/docs/metrics/generation/bleurtscore.md",
+  "sourceDirName": "metrics/generation",
+  "slug": "/metrics/generation/bleurtscore",
+  "permalink": "/docs/metrics/generation/bleurtscore",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/your-org/your-repo-name/edit/main/docs/docs/metrics/generation/bleurtscore.md",
+  "tags": [],
+  "version": "current",
+  "frontMatter": {
+    "id": "bleurtscore",
+    "title": "BleurtScore"
+  },
+  "sidebar": "docs",
+  "previous": {
+    "title": "BARTScore",
+    "permalink": "/docs/metrics/generation/bartscore"
+  },
+  "next": {
+    "title": "ROUGEScore",
+    "permalink": "/docs/metrics/generation/rougescore"
+  }
+}

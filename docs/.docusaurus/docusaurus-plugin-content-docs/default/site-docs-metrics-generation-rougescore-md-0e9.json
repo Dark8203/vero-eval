@@ -1,0 +1,27 @@
+{
+  "id": "metrics/generation/rougescore",
+  "title": "ROUGEScore",
+  "description": "ROUGE-L focuses on the Longest Common Subsequence (LCS) between generated and reference texts.",
+  "source": "@site/docs/metrics/generation/rougescore.md",
+  "sourceDirName": "metrics/generation",
+  "slug": "/metrics/generation/rougescore",
+  "permalink": "/docs/metrics/generation/rougescore",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/your-org/your-repo-name/edit/main/docs/docs/metrics/generation/rougescore.md",
+  "tags": [],
+  "version": "current",
+  "frontMatter": {
+    "id": "rougescore",
+    "title": "ROUGEScore"
+  },
+  "sidebar": "docs",
+  "previous": {
+    "title": "BleurtScore",
+    "permalink": "/docs/metrics/generation/bleurtscore"
+  },
+  "next": {
+    "title": "SEMScore",
+    "permalink": "/docs/metrics/generation/semscore"
+  }
+}

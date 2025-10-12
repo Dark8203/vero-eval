@@ -1,0 +1,27 @@
+{
+  "id": "metrics/generation/alignscore",
+  "title": "AlignScore",
+  "description": "A factual consistency / alignment metric that evaluates how well a claim (generated or asserted text) is supported by a context (retrieved or original text).",
+  "source": "@site/docs/metrics/generation/alignscore.md",
+  "sourceDirName": "metrics/generation",
+  "slug": "/metrics/generation/alignscore",
+  "permalink": "/docs/metrics/generation/alignscore",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/your-org/your-repo-name/edit/main/docs/docs/metrics/generation/alignscore.md",
+  "tags": [],
+  "version": "current",
+  "frontMatter": {
+    "id": "alignscore",
+    "title": "AlignScore"
+  },
+  "sidebar": "docs",
+  "previous": {
+    "title": "SEMScore",
+    "permalink": "/docs/metrics/generation/semscore"
+  },
+  "next": {
+    "title": "G-Eval",
+    "permalink": "/docs/metrics/generation/geval"
+  }
+}

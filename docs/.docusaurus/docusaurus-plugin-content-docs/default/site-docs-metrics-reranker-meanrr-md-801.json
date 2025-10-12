@@ -1,0 +1,27 @@
+{
+  "id": "metrics/reranker/meanrr",
+  "title": "MeanRR",
+  "description": "Mean Reciprocal Rank: for each query, take reciprocal rank of first relevant item, then average.",
+  "source": "@site/docs/metrics/reranker/meanrr.md",
+  "sourceDirName": "metrics/reranker",
+  "slug": "/metrics/reranker/meanrr",
+  "permalink": "/docs/metrics/reranker/meanrr",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/your-org/your-repo-name/edit/main/docs/docs/metrics/reranker/meanrr.md",
+  "tags": [],
+  "version": "current",
+  "frontMatter": {
+    "id": "meanrr",
+    "title": "MeanRR"
+  },
+  "sidebar": "docs",
+  "previous": {
+    "title": "Sufficiency Score",
+    "permalink": "/docs/metrics/retriever/sufficiencyscore"
+  },
+  "next": {
+    "title": "MeanAP",
+    "permalink": "/docs/metrics/reranker/meanap"
+  }
+}

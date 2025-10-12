@@ -1,0 +1,27 @@
+{
+  "id": "getting-started/tutorials/end-to-end-eval",
+  "title": "End-to-end evaluation tutorial",
+  "description": "This tutorial shows how to run an evaluation suite against a small dataset.",
+  "source": "@site/docs/getting-started/tutorials/end-to-end eval.md",
+  "sourceDirName": "getting-started/tutorials",
+  "slug": "/getting-started/tutorials/end-to-end-eval",
+  "permalink": "/docs/getting-started/tutorials/end-to-end-eval",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/your-org/your-repo-name/edit/main/docs/docs/getting-started/tutorials/end-to-end eval.md",
+  "tags": [],
+  "version": "current",
+  "frontMatter": {
+    "id": "end-to-end-eval",
+    "title": "End-to-end evaluation tutorial"
+  },
+  "sidebar": "docs",
+  "previous": {
+    "title": "Project Structure",
+    "permalink": "/docs/getting-started/project-structure"
+  },
+  "next": {
+    "title": "Metrics overview",
+    "permalink": "/docs/metrics/overview"
+  }
+}

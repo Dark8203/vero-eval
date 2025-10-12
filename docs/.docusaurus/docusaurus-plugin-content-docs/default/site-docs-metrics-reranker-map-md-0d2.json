@@ -1,0 +1,27 @@
+{
+  "id": "metrics/reranker/meanap",
+  "title": "MeanAP",
+  "description": "Mean Average Precision: average over queries of the average precision value.",
+  "source": "@site/docs/metrics/reranker/map.md",
+  "sourceDirName": "metrics/reranker",
+  "slug": "/metrics/reranker/meanap",
+  "permalink": "/docs/metrics/reranker/meanap",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/your-org/your-repo-name/edit/main/docs/docs/metrics/reranker/map.md",
+  "tags": [],
+  "version": "current",
+  "frontMatter": {
+    "id": "meanap",
+    "title": "MeanAP"
+  },
+  "sidebar": "docs",
+  "previous": {
+    "title": "MeanRR",
+    "permalink": "/docs/metrics/reranker/meanrr"
+  },
+  "next": {
+    "title": "Reranker NDCG",
+    "permalink": "/docs/metrics/reranker/rerank-ndcg"
+  }
+}

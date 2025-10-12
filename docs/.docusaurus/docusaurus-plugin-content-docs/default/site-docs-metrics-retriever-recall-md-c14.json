@@ -1,0 +1,27 @@
+{
+  "id": "metrics/retriever/recallscore",
+  "title": "Recall Score",
+  "description": "Measures how many ground truth items are retrieved.",
+  "source": "@site/docs/metrics/retriever/recall.md",
+  "sourceDirName": "metrics/retriever",
+  "slug": "/metrics/retriever/recallscore",
+  "permalink": "/docs/metrics/retriever/recallscore",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/your-org/your-repo-name/edit/main/docs/docs/metrics/retriever/recall.md",
+  "tags": [],
+  "version": "current",
+  "frontMatter": {
+    "id": "recallscore",
+    "title": "Recall Score"
+  },
+  "sidebar": "docs",
+  "previous": {
+    "title": "G-Eval",
+    "permalink": "/docs/metrics/generation/geval"
+  },
+  "next": {
+    "title": "Precision Score",
+    "permalink": "/docs/metrics/retriever/precisionscore"
+  }
+}

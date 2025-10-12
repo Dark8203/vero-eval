@@ -1,0 +1,27 @@
+{
+  "id": "getting-started/project-structure",
+  "title": "Project Structure",
+  "description": "",
+  "source": "@site/docs/getting-started/project-structure.md",
+  "sourceDirName": "getting-started",
+  "slug": "/getting-started/project-structure",
+  "permalink": "/docs/getting-started/project-structure",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/your-org/your-repo-name/edit/main/docs/docs/getting-started/project-structure.md",
+  "tags": [],
+  "version": "current",
+  "frontMatter": {
+    "id": "project-structure",
+    "title": "Project Structure"
+  },
+  "sidebar": "docs",
+  "previous": {
+    "title": "QuickStart Guide",
+    "permalink": "/docs/getting-started/quickstart"
+  },
+  "next": {
+    "title": "End-to-end evaluation tutorial",
+    "permalink": "/docs/getting-started/tutorials/end-to-end-eval"
+  }
+}

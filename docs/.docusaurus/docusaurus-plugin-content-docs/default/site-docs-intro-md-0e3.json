@@ -1,0 +1,24 @@
+{
+  "id": "intro",
+  "title": "AI Evaluation Framework",
+  "description": "Vero is a comprehensive platform for the evaluation and continuous monitoring of AI pipelines, ensuring optimal performance and enterprise-grade reliability. It empowers developers and teams to transform uncertainty into confidence by providing a straightforward, four-step process to evaluate, monitor, and gain unparalleled confidence in their AI pipelines.",
+  "source": "@site/docs/intro.md",
+  "sourceDirName": ".",
+  "slug": "/",
+  "permalink": "/docs/",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/your-org/your-repo-name/edit/main/docs/docs/intro.md",
+  "tags": [],
+  "version": "current",
+  "frontMatter": {
+    "id": "intro",
+    "title": "AI Evaluation Framework",
+    "slug": "/"
+  },
+  "sidebar": "docs",
+  "next": {
+    "title": "QuickStart Guide",
+    "permalink": "/docs/getting-started/quickstart"
+  }
+}

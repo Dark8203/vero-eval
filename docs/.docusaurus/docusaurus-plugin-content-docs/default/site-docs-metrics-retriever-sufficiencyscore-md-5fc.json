@@ -1,0 +1,27 @@
+{
+  "id": "metrics/retriever/sufficiencyscore",
+  "title": "Sufficiency Score",
+  "description": "Determines whether the retrieved set is sufficient to cover all ground truth items.",
+  "source": "@site/docs/metrics/retriever/sufficiencyscore.md",
+  "sourceDirName": "metrics/retriever",
+  "slug": "/metrics/retriever/sufficiencyscore",
+  "permalink": "/docs/metrics/retriever/sufficiencyscore",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/your-org/your-repo-name/edit/main/docs/docs/metrics/retriever/sufficiencyscore.md",
+  "tags": [],
+  "version": "current",
+  "frontMatter": {
+    "id": "sufficiencyscore",
+    "title": "Sufficiency Score"
+  },
+  "sidebar": "docs",
+  "previous": {
+    "title": "Citation Score",
+    "permalink": "/docs/metrics/retriever/citationscore"
+  },
+  "next": {
+    "title": "MeanRR",
+    "permalink": "/docs/metrics/reranker/meanrr"
+  }
+}

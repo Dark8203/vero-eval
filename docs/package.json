@@ -1,0 +1,15 @@
+{
+  "name": "rag-eval-docs",
+  "private": true,
+  "version": "0.1.0",
+  "scripts": {
+    "start": "docusaurus start",
+    "build": "docusaurus build",
+    "swizzle": "docusaurus swizzle @docusaurus/theme-classic",
+    "deploy": "GIT_USER=${GITHUB_ACTOR:-your-github-username} docusaurus deploy"
+  },
+  "dependencies": {
+    "@docusaurus/core": "^3.0.0",
+    "@docusaurus/preset-classic": "^3.0.0"
+  }
+}

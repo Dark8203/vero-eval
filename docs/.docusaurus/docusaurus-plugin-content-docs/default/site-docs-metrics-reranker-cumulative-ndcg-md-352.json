@@ -1,0 +1,23 @@
+{
+  "id": "metrics/reranker/cumulative-ndcg",
+  "title": "Cumulative NDCG",
+  "description": "Unique implementation of NDCG@k that can be used to evaluate the cumulative performance of retriever and reranker.",
+  "source": "@site/docs/metrics/reranker/cumulative-ndcg.md",
+  "sourceDirName": "metrics/reranker",
+  "slug": "/metrics/reranker/cumulative-ndcg",
+  "permalink": "/docs/metrics/reranker/cumulative-ndcg",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/your-org/your-repo-name/edit/main/docs/docs/metrics/reranker/cumulative-ndcg.md",
+  "tags": [],
+  "version": "current",
+  "frontMatter": {
+    "id": "cumulative-ndcg",
+    "title": "Cumulative NDCG"
+  },
+  "sidebar": "docs",
+  "previous": {
+    "title": "Reranker NDCG",
+    "permalink": "/docs/metrics/reranker/rerank-ndcg"
+  }
+}

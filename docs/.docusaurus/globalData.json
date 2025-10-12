@@ -1,0 +1,128 @@
+{
+  "docusaurus-plugin-content-docs": {
+    "default": {
+      "path": "/docs/",
+      "versions": [
+        {
+          "name": "current",
+          "label": "Next",
+          "isLast": true,
+          "path": "/docs/",
+          "mainDocId": "intro",
+          "docs": [
+            {
+              "id": "getting-started/project-structure",
+              "path": "/docs/getting-started/project-structure",
+              "sidebar": "docs"
+            },
+            {
+              "id": "getting-started/quickstart",
+              "path": "/docs/getting-started/quickstart",
+              "sidebar": "docs"
+            },
+            {
+              "id": "getting-started/tutorials/end-to-end-eval",
+              "path": "/docs/getting-started/tutorials/end-to-end-eval",
+              "sidebar": "docs"
+            },
+            {
+              "id": "intro",
+              "path": "/docs/",
+              "sidebar": "docs"
+            },
+            {
+              "id": "metrics/generation/alignscore",
+              "path": "/docs/metrics/generation/alignscore",
+              "sidebar": "docs"
+            },
+            {
+              "id": "metrics/generation/bartscore",
+              "path": "/docs/metrics/generation/bartscore",
+              "sidebar": "docs"
+            },
+            {
+              "id": "metrics/generation/bertscore",
+              "path": "/docs/metrics/generation/bertscore",
+              "sidebar": "docs"
+            },
+            {
+              "id": "metrics/generation/bleurtscore",
+              "path": "/docs/metrics/generation/bleurtscore",
+              "sidebar": "docs"
+            },
+            {
+              "id": "metrics/generation/geval",
+              "path": "/docs/metrics/generation/geval",
+              "sidebar": "docs"
+            },
+            {
+              "id": "metrics/generation/rougescore",
+              "path": "/docs/metrics/generation/rougescore",
+              "sidebar": "docs"
+            },
+            {
+              "id": "metrics/generation/semscore",
+              "path": "/docs/metrics/generation/semscore",
+              "sidebar": "docs"
+            },
+            {
+              "id": "metrics/overview",
+              "path": "/docs/metrics/overview",
+              "sidebar": "docs"
+            },
+            {
+              "id": "metrics/reranker/cumulative-ndcg",
+              "path": "/docs/metrics/reranker/cumulative-ndcg",
+              "sidebar": "docs"
+            },
+            {
+              "id": "metrics/reranker/meanap",
+              "path": "/docs/metrics/reranker/meanap",
+              "sidebar": "docs"
+            },
+            {
+              "id": "metrics/reranker/meanrr",
+              "path": "/docs/metrics/reranker/meanrr",
+              "sidebar": "docs"
+            },
+            {
+              "id": "metrics/reranker/rerank-ndcg",
+              "path": "/docs/metrics/reranker/rerank-ndcg",
+              "sidebar": "docs"
+            },
+            {
+              "id": "metrics/retriever/citationscore",
+              "path": "/docs/metrics/retriever/citationscore",
+              "sidebar": "docs"
+            },
+            {
+              "id": "metrics/retriever/precisionscore",
+              "path": "/docs/metrics/retriever/precisionscore",
+              "sidebar": "docs"
+            },
+            {
+              "id": "metrics/retriever/recallscore",
+              "path": "/docs/metrics/retriever/recallscore",
+              "sidebar": "docs"
+            },
+            {
+              "id": "metrics/retriever/sufficiencyscore",
+              "path": "/docs/metrics/retriever/sufficiencyscore",
+              "sidebar": "docs"
+            }
+          ],
+          "draftIds": [],
+          "sidebars": {
+            "docs": {
+              "link": {
+                "path": "/docs/",
+                "label": "intro"
+              }
+            }
+          }
+        }
+      ],
+      "breadcrumbs": true
+    }
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "id": "getting-started/install",
+  "title": "Install",
+  "description": "Install via pip (recommended inside a virtualenv):",
+  "source": "@site/docs/getting-started/install.md",
+  "sourceDirName": "getting-started",
+  "slug": "/getting-started/install",
+  "permalink": "/your-repo-name/getting-started/install",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/your-org/your-repo-name/edit/main/docs/docs/getting-started/install.md",
+  "tags": [],
+  "version": "current",
+  "lastUpdatedBy": "Author",
+  "lastUpdatedAt": 1539502055000,
+  "frontMatter": {
+    "id": "install",
+    "title": "Install"
+  },
+  "sidebar": "docs",
+  "previous": {
+    "title": "RAG Evaluation Framework",
+    "permalink": "/your-repo-name/"
+  },
+  "next": {
+    "title": "quickstart",
+    "permalink": "/your-repo-name/getting-started/quickstart"
+  }
+}

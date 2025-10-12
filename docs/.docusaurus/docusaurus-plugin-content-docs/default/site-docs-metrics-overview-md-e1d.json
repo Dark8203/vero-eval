@@ -1,0 +1,27 @@
+{
+  "id": "metrics/overview",
+  "title": "Metrics overview",
+  "description": "The RAG Evaluation Framework supports three classes of metrics:",
+  "source": "@site/docs/metrics/overview.md",
+  "sourceDirName": "metrics",
+  "slug": "/metrics/overview",
+  "permalink": "/docs/metrics/overview",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/your-org/your-repo-name/edit/main/docs/docs/metrics/overview.md",
+  "tags": [],
+  "version": "current",
+  "frontMatter": {
+    "id": "overview",
+    "title": "Metrics overview"
+  },
+  "sidebar": "docs",
+  "previous": {
+    "title": "End-to-end evaluation tutorial",
+    "permalink": "/docs/getting-started/tutorials/end-to-end-eval"
+  },
+  "next": {
+    "title": "BERTScore",
+    "permalink": "/docs/metrics/generation/bertscore"
+  }
+}

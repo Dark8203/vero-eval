@@ -1,0 +1,27 @@
+{
+  "id": "metrics/retriever/precisionscore",
+  "title": "Precision Score",
+  "description": "Measures how many retrieved items are relevant (i.e. in ground truth).",
+  "source": "@site/docs/metrics/retriever/precision.md",
+  "sourceDirName": "metrics/retriever",
+  "slug": "/metrics/retriever/precisionscore",
+  "permalink": "/docs/metrics/retriever/precisionscore",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/your-org/your-repo-name/edit/main/docs/docs/metrics/retriever/precision.md",
+  "tags": [],
+  "version": "current",
+  "frontMatter": {
+    "id": "precisionscore",
+    "title": "Precision Score"
+  },
+  "sidebar": "docs",
+  "previous": {
+    "title": "Recall Score",
+    "permalink": "/docs/metrics/retriever/recallscore"
+  },
+  "next": {
+    "title": "Citation Score",
+    "permalink": "/docs/metrics/retriever/citationscore"
+  }
+}

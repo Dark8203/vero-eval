@@ -1,0 +1,27 @@
+{
+  "id": "metrics/generation/semscore",
+  "title": "SEMScore",
+  "description": "A metric that measures semantic similarity between candidate (generated) text and reference text using embeddings and cosine similarity.",
+  "source": "@site/docs/metrics/generation/semscore.md",
+  "sourceDirName": "metrics/generation",
+  "slug": "/metrics/generation/semscore",
+  "permalink": "/docs/metrics/generation/semscore",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/your-org/your-repo-name/edit/main/docs/docs/metrics/generation/semscore.md",
+  "tags": [],
+  "version": "current",
+  "frontMatter": {
+    "id": "semscore",
+    "title": "SEMScore"
+  },
+  "sidebar": "docs",
+  "previous": {
+    "title": "ROUGEScore",
+    "permalink": "/docs/metrics/generation/rougescore"
+  },
+  "next": {
+    "title": "AlignScore",
+    "permalink": "/docs/metrics/generation/alignscore"
+  }
+}

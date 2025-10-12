@@ -1,0 +1,27 @@
+{
+  "id": "metrics/generation/bertscore",
+  "title": "BERTScore",
+  "description": "It is an automatic evaluation metric for text generation tasks that measures the similarity between candidate and reference texts using contextual embeddings from pre-trained BERT models.",
+  "source": "@site/docs/metrics/generation/bertscore.md",
+  "sourceDirName": "metrics/generation",
+  "slug": "/metrics/generation/bertscore",
+  "permalink": "/docs/metrics/generation/bertscore",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/your-org/your-repo-name/edit/main/docs/docs/metrics/generation/bertscore.md",
+  "tags": [],
+  "version": "current",
+  "frontMatter": {
+    "id": "bertscore",
+    "title": "BERTScore"
+  },
+  "sidebar": "docs",
+  "previous": {
+    "title": "Metrics overview",
+    "permalink": "/docs/metrics/overview"
+  },
+  "next": {
+    "title": "BARTScore",
+    "permalink": "/docs/metrics/generation/bartscore"
+  }
+}

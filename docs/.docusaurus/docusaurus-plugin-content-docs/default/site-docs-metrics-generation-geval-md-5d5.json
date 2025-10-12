@@ -1,0 +1,27 @@
+{
+  "id": "metrics/generation/geval",
+  "title": "G-Eval",
+  "description": "An LLM-based evaluation framework where a large language model directly scores the generated output against criteria such as relevance, consistency, and fluency.",
+  "source": "@site/docs/metrics/generation/geval.md",
+  "sourceDirName": "metrics/generation",
+  "slug": "/metrics/generation/geval",
+  "permalink": "/docs/metrics/generation/geval",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/your-org/your-repo-name/edit/main/docs/docs/metrics/generation/geval.md",
+  "tags": [],
+  "version": "current",
+  "frontMatter": {
+    "id": "geval",
+    "title": "G-Eval"
+  },
+  "sidebar": "docs",
+  "previous": {
+    "title": "AlignScore",
+    "permalink": "/docs/metrics/generation/alignscore"
+  },
+  "next": {
+    "title": "Recall Score",
+    "permalink": "/docs/metrics/retriever/recallscore"
+  }
+}

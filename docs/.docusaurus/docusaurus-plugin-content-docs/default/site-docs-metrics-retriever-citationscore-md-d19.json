@@ -1,0 +1,27 @@
+{
+  "id": "metrics/retriever/citationscore",
+  "title": "Citation Score",
+  "description": "Measures the overlap of retrieved items with ground truth citations.",
+  "source": "@site/docs/metrics/retriever/citationscore.md",
+  "sourceDirName": "metrics/retriever",
+  "slug": "/metrics/retriever/citationscore",
+  "permalink": "/docs/metrics/retriever/citationscore",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/your-org/your-repo-name/edit/main/docs/docs/metrics/retriever/citationscore.md",
+  "tags": [],
+  "version": "current",
+  "frontMatter": {
+    "id": "citationscore",
+    "title": "Citation Score"
+  },
+  "sidebar": "docs",
+  "previous": {
+    "title": "Precision Score",
+    "permalink": "/docs/metrics/retriever/precisionscore"
+  },
+  "next": {
+    "title": "Sufficiency Score",
+    "permalink": "/docs/metrics/retriever/sufficiencyscore"
+  }
+}

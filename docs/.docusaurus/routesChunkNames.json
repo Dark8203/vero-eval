@@ -1,0 +1,138 @@
+{
+  "/docs/__docusaurus/debug-e58": {
+    "__comp": "__comp---theme-debug-config-23-a-2ff",
+    "__context": {
+      "plugin": "plugin---docs-docusaurus-debugb-38-c84"
+    }
+  },
+  "/docs/__docusaurus/debug/config-2ce": {
+    "__comp": "__comp---theme-debug-config-23-a-2ff",
+    "__context": {
+      "plugin": "plugin---docs-docusaurus-debugb-38-c84"
+    }
+  },
+  "/docs/__docusaurus/debug/content-11b": {
+    "__comp": "__comp---theme-debug-contentba-8-ce7",
+    "__context": {
+      "plugin": "plugin---docs-docusaurus-debugb-38-c84"
+    },
+    "__props": "__props---docs-docusaurus-debug-content-344-8d5"
+  },
+  "/docs/__docusaurus/debug/globalData-f13": {
+    "__comp": "__comp---theme-debug-global-dataede-0fa",
+    "__context": {
+      "plugin": "plugin---docs-docusaurus-debugb-38-c84"
+    }
+  },
+  "/docs/__docusaurus/debug/metadata-bff": {
+    "__comp": "__comp---theme-debug-site-metadata-68-e-3d4",
+    "__context": {
+      "plugin": "plugin---docs-docusaurus-debugb-38-c84"
+    }
+  },
+  "/docs/__docusaurus/debug/registry-830": {
+    "__comp": "__comp---theme-debug-registry-679-501",
+    "__context": {
+      "plugin": "plugin---docs-docusaurus-debugb-38-c84"
+    }
+  },
+  "/docs/__docusaurus/debug/routes-13e": {
+    "__comp": "__comp---theme-debug-routes-946-699",
+    "__context": {
+      "plugin": "plugin---docs-docusaurus-debugb-38-c84"
+    }
+  },
+  "/docs/-ec8": {
+    "__comp": "__comp---theme-docs-root-5-e-9-0b6",
+    "__context": {
+      "plugin": "plugin---docs-aba-4f5"
+    }
+  },
+  "/docs/-093": {
+    "__comp": "__comp---theme-doc-version-roota-7-b-5de",
+    "__props": "__props---docs-11-b-f70"
+  },
+  "/docs/-262": {
+    "__comp": "__comp---theme-doc-roota-94-67a"
+  },
+  "/docs/getting-started/project-structure-2a1": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---docs-getting-started-project-structure-4-c-5-1fd"
+  },
+  "/docs/getting-started/quickstart-165": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---docs-getting-started-quickstartfbd-5fc"
+  },
+  "/docs/getting-started/tutorials/end-to-end-eval-9e2": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---docs-getting-started-tutorials-end-to-end-eval-951-e65"
+  },
+  "/docs/metrics/generation/alignscore-2b4": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---docs-metrics-generation-alignscore-314-b93"
+  },
+  "/docs/metrics/generation/bartscore-e64": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---docs-metrics-generation-bartscore-270-2a7"
+  },
+  "/docs/metrics/generation/bertscore-1a2": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---docs-metrics-generation-bertscorefdf-171"
+  },
+  "/docs/metrics/generation/bleurtscore-f03": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---docs-metrics-generation-bleurtscoreff-1-163"
+  },
+  "/docs/metrics/generation/geval-eab": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---docs-metrics-generation-geval-5-d-5-781"
+  },
+  "/docs/metrics/generation/rougescore-689": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---docs-metrics-generation-rougescore-0-e-9-008"
+  },
+  "/docs/metrics/generation/semscore-5e8": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---docs-metrics-generation-semscore-498-cda"
+  },
+  "/docs/metrics/overview-eee": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---docs-metrics-overviewe-1-d-5c2"
+  },
+  "/docs/metrics/reranker/cumulative-ndcg-a1e": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---docs-metrics-reranker-cumulative-ndcg-352-591"
+  },
+  "/docs/metrics/reranker/meanap-081": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---docs-metrics-reranker-meanap-0-d-2-0b0"
+  },
+  "/docs/metrics/reranker/meanrr-3e6": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---docs-metrics-reranker-meanrr-801-b33"
+  },
+  "/docs/metrics/reranker/rerank-ndcg-3c1": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---docs-metrics-reranker-rerank-ndcg-9-d-8-207"
+  },
+  "/docs/metrics/retriever/citationscore-d94": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---docs-metrics-retriever-citationscored-19-4de"
+  },
+  "/docs/metrics/retriever/precisionscore-c81": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---docs-metrics-retriever-precisionscoreea-5-45d"
+  },
+  "/docs/metrics/retriever/recallscore-891": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---docs-metrics-retriever-recallscorec-14-049"
+  },
+  "/docs/metrics/retriever/sufficiencyscore-696": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---docs-metrics-retriever-sufficiencyscore-5-fc-202"
+  },
+  "/docs/-be8": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---docs-0-e-3-18c"
+  }
+}

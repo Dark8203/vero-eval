@@ -1,0 +1,27 @@
+{
+  "id": "metrics/reranker/rerank-ndcg",
+  "title": "Reranker NDCG",
+  "description": "Normalized Discounted Cumulative Gain for ranking metrics using graded relevance scores.",
+  "source": "@site/docs/metrics/reranker/reranker-ndcg.md",
+  "sourceDirName": "metrics/reranker",
+  "slug": "/metrics/reranker/rerank-ndcg",
+  "permalink": "/docs/metrics/reranker/rerank-ndcg",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/your-org/your-repo-name/edit/main/docs/docs/metrics/reranker/reranker-ndcg.md",
+  "tags": [],
+  "version": "current",
+  "frontMatter": {
+    "id": "rerank-ndcg",
+    "title": "Reranker NDCG"
+  },
+  "sidebar": "docs",
+  "previous": {
+    "title": "MeanAP",
+    "permalink": "/docs/metrics/reranker/meanap"
+  },
+  "next": {
+    "title": "Cumulative NDCG",
+    "permalink": "/docs/metrics/reranker/cumulative-ndcg"
+  }
+}

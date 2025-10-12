@@ -1,0 +1,27 @@
+{
+  "id": "getting-started/quickstart",
+  "title": "QuickStart Guide",
+  "description": "Vero-Eval is an open-source evaluation framework designed to rigorously assess the performance of Retrieval-Augmented Generation (RAG) pipelines. It provides built-in tracing, logging, and a rich suite of metrics to evaluate each component in the pipeline — from retrieval and reranking to generation — all integrated end to end.",
+  "source": "@site/docs/getting-started/quickstart.md",
+  "sourceDirName": "getting-started",
+  "slug": "/getting-started/quickstart",
+  "permalink": "/docs/getting-started/quickstart",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/your-org/your-repo-name/edit/main/docs/docs/getting-started/quickstart.md",
+  "tags": [],
+  "version": "current",
+  "frontMatter": {
+    "id": "quickstart",
+    "title": "QuickStart Guide"
+  },
+  "sidebar": "docs",
+  "previous": {
+    "title": "AI Evaluation Framework",
+    "permalink": "/docs/"
+  },
+  "next": {
+    "title": "Project Structure",
+    "permalink": "/docs/getting-started/project-structure"
+  }
+}

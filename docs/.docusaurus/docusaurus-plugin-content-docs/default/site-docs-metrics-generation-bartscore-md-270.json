@@ -1,0 +1,27 @@
+{
+  "id": "metrics/generation/bartscore",
+  "title": "BARTScore",
+  "description": "A generation evaluation metric that uses a pretrained BART model to assess the quality of generated text against reference text and is a type of comparison score   .",
+  "source": "@site/docs/metrics/generation/bartscore.md",
+  "sourceDirName": "metrics/generation",
+  "slug": "/metrics/generation/bartscore",
+  "permalink": "/docs/metrics/generation/bartscore",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/your-org/your-repo-name/edit/main/docs/docs/metrics/generation/bartscore.md",
+  "tags": [],
+  "version": "current",
+  "frontMatter": {
+    "id": "bartscore",
+    "title": "BARTScore"
+  },
+  "sidebar": "docs",
+  "previous": {
+    "title": "BERTScore",
+    "permalink": "/docs/metrics/generation/bertscore"
+  },
+  "next": {
+    "title": "BleurtScore",
+    "permalink": "/docs/metrics/generation/bleurtscore"
+  }
+}
