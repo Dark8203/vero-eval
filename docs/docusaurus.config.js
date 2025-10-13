@@ -27,4 +27,11 @@ module.exports = {
       }),
     ],
   ],
+    themeConfig: {
+    colorMode: {
+      defaultMode: 'dark',            // <- set dark as the default
+      disableSwitch: false,           // <- keep the toggle so user can switch
+      respectPrefersColorScheme: false // <- ignore the user’s OS theme preference
+    },
+},
 };
