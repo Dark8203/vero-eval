@@ -44,7 +44,7 @@ jobs:
           git clone https://x-access-token:${{ secrets.WEBSITE_REPO_TOKEN }}@github.com/${WEBSITE_REPO}.git website
           cd website
           # Optionally switch to branch if your gh-pages site is on a separate branch:
-          git checkout gh-pages
+          git checkout main
 
       - name: Copy built docs
         run: |
