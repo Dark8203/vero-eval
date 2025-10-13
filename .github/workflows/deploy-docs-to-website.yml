@@ -54,13 +54,20 @@ jobs:
           # If build is under subfolder:
           cp -R docs/build/* website/docs/
 
-      - name: Commit & Push docs
+      - name: Commit, Sync & Push docs
         working-directory: website
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
+          
+          # Make sure we have the remote updates
+          git fetch origin main
+          
+          # Merge remote changes (if any)
+          git merge origin/main --allow-unrelated-histories || echo "Nothing to merge"
+          
           git add docs
           git commit -m "Update docs from vero-eval (docs repo)" || echo "No changes to commit"
           git push origin HEAD:main
-          # or push to whatever branch your website uses
+          
 
