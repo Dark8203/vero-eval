@@ -50,8 +50,7 @@ jobs:
         run: |
           rm -rf website/public/docs
           mkdir -p website/public/docs
-
-#           cp -R docs/build/* website/docs/
+          #cp -R docs/build/* website/docs/
           rsync -a --delete "${SOURCE}/" website/public/docs/
 
       - name: Commit, Sync & Push docs
