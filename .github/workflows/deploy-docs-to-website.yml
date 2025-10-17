@@ -48,11 +48,11 @@ jobs:
 
       - name: Copy built docs
         run: |
-          rm -rf website/docs
-          mkdir -p website/docs
-          # cp -R build/* website/docs/
-          # If build is under subfolder:
-          cp -R docs/build/* website/docs/
+          rm -rf website/public/docs
+          mkdir -p website/public/docs
+
+#           cp -R docs/build/* website/docs/
+          rsync -a --delete "${SOURCE}/" website/public/docs/
 
       - name: Commit, Sync & Push docs
         working-directory: website
@@ -66,7 +66,7 @@ jobs:
           # Merge remote changes (if any)
           git merge origin/main --allow-unrelated-histories || echo "Nothing to merge"
           
-          git add docs
+          git add -A public/docs
           git commit -m "Update docs from vero-eval (docs repo)" || echo "No changes to commit"
           git push origin HEAD:main
           
