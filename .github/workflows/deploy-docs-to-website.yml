@@ -48,6 +48,7 @@ jobs:
 
       - name: Copy built docs
         run: |
+          SOURCE="docs/build"
           rm -rf website/public/docs
           mkdir -p website/public/docs
           #cp -R docs/build/* website/docs/
