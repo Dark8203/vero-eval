@@ -92,3 +92,10 @@
 # with GEvalScore(api_key) as g_eval:
 #     g_eval_results = [g_eval.evaluate(chunk,ans, metric='Faithfulness') for chunk, ans in tqdm(zip(chunks_list, answers_list), total=len(df_new))]
 # print(g_eval_results)
+
+from src.vero import Evaluator
+import pandas as pd
+
+evaluator = Evaluator()
+
+evaluator.evaluate_generation('', r'testing.csv')

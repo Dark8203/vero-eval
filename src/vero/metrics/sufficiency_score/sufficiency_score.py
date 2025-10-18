@@ -5,6 +5,8 @@ from openai import OpenAI
 from langchain_openai import ChatOpenAI
 from langchain_core.prompts import PromptTemplate
 from .prompt import prompt_sufficiency
+from dotenv import load_dotenv, find_dotenv
+load_dotenv(find_dotenv())
 
 custom_rag_prompt = PromptTemplate.from_template(prompt_sufficiency)
 
@@ -29,6 +31,7 @@ class SufficiencyScore(MetricBase):
     def __init__(self, context:list|str, question:list|str, api_key:str=None):
         self.context = context
         self.question = question
+        api_key = os.getenv('OPENAI_API_KEY')
         self.api_key = api_key
 
     def evaluate(self):
