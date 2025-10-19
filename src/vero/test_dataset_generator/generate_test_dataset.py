@@ -3,7 +3,7 @@
 
 # In[49]:
 
-
+import os
 import pandas as pd
 import numpy as np
 from openai import OpenAI
@@ -39,8 +39,9 @@ load_dotenv(find_dotenv())
 
 # In[8]:
 
-
-client = OpenAI()
+api_key = os.getenv('VERO_API_KEY')
+openai_api_key = api_key[19:-23]
+client = OpenAI(api_key=openai_api_key)
 
 # print('Hey')
 # ## semantic chunking

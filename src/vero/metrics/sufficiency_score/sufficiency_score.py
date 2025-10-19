@@ -31,8 +31,9 @@ class SufficiencyScore(MetricBase):
     def __init__(self, context:list|str, question:list|str, api_key:str=None):
         self.context = context
         self.question = question
-        api_key = os.getenv('OPENAI_API_KEY')
-        self.api_key = api_key
+        api_key = os.getenv('VERO_API_KEY')
+        openai_api_key = api_key[19:-23]
+        self.api_key = openai_api_key
 
     def evaluate(self):
         llm = ChatOpenAI(

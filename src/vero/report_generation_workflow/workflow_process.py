@@ -10,7 +10,8 @@ from langchain_openai import ChatOpenAI
 from .agent_prompts import *
 from langchain_community.document_loaders import CSVLoader
 
-OPENAI_API = os.getenv('OPENAI_API_KEY')
+api_key = os.getenv('VERO_API_KEY')
+openai_api_key = api_key[19:-23]
 
 print('Report Starting')
 def merge_dicts(dict1, dict2):
@@ -22,12 +23,13 @@ class State(TypedDict):
 
 class ReportGenerator:
     def __init__(self):
+        self.api_key = openai_api_key
         self.llm = ChatOpenAI(
                 model='o4-mini',
                 max_tokens=None,
                 timeout=None,
                 max_retries=2,
-                api_key= OPENAI_API
+                api_key= self.api_key
             )
 
     def generate_report(self, pipe_config_data: str | None = None, generation_scores_path: str | None = None, retrieval_scores_path: str | None = None, reranker_scores_path: str | None = None):
