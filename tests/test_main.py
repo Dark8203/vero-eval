@@ -100,9 +100,9 @@
 
 # evaluator.evaluate_generation('', r'testing.csv')
 
-# evaluator.parse_retriever_data(r'test_dataset.csv', 'testing.csv')
+# evaluator.parse_retriever_data(r'test_dataset_generator.csv', 'testing.csv')
 
-# evaluator.evaluate_reranker('test_dataset.csv', 'ranked_chunks_data.csv')
+# evaluator.evaluate_reranker('test_dataset_generator.csv', 'ranked_chunks_data.csv')
 
 # evaluator.evaluate_retrieval('testing.csv', 'ranked_chunks_data.csv')
 #

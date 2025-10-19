@@ -6,30 +6,16 @@
 
 import pandas as pd
 import numpy as np
-import os
-import re
 from openai import OpenAI
 from langchain_community.document_loaders import DirectoryLoader,PyPDFLoader
-from langchain_text_splitters import RecursiveCharacterTextSplitter
-import random
 import json
 # import sys
 # sys.path.insert(0, r"C:\Users\Alakh Agrawal\OneDrive\New folder (2)\rag_rt")
 from dotenv import load_dotenv, find_dotenv
-import langgraph
-from datetime import date
 from fastapi import FastAPI
-from pydantic import BaseModel
 import time
-from typing import TypedDict, List, Dict, Any, Optional
-from langgraph.graph import StateGraph, START, END
-import sys
-import requests
-from pprint import pprint
-import datetime
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from apscheduler.triggers.interval import IntervalTrigger
-import asyncio
 from typing import List, Literal
 from pydantic import BaseModel, Field, conlist
 from tqdm import tqdm
@@ -451,7 +437,7 @@ def get_QA_query_intent(dfct, n=10):
 
 # In[48]:
 
-def generate_and_save(data_path, usecase, save_path='test_dataset.csv', n_queries=50):
+def generate_and_save(data_path, usecase, save_path='test_dataset_generator.csv', n_queries=50):
     
     # data_path = data_path
     loader = DirectoryLoader(data_path, glob = '*.pdf', loader_cls = PyPDFLoader)
