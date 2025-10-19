@@ -57,5 +57,26 @@ module.exports = {
         },
       ]
     },
+    {
+      type: 'category',
+      label: 'Evaluator',
+      items: [
+        'evaluator/evaluator',
+      ]
+    },
+    {
+      type: 'category',
+      label: 'Test Dataset Generation',
+      items: [
+        'test-dataset-generation/test-dataset-generation',
+      ]
+    },
+    {
+      type: 'category',
+      label: 'Report Generation',
+      items: [
+        'report-generation/report-generation',
+      ]
+    }
   ],
 };
