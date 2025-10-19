@@ -1,3 +1,5 @@
+import traceback
+
 from vero.metrics import MetricBase
 import gc
 from rouge_score import rouge_scorer
@@ -60,6 +62,7 @@ class RougeScore(MetricBase):
 
         except Exception as e:
             # logger.info('ROUGE score calculation failed\nError:', e)
+            print('Error calculating ROUGE Score\nError:', traceback.format_exc())
             return None
 
     def __exit__(self, exc_type, exc_value, traceback):

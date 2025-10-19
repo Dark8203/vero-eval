@@ -1,3 +1,5 @@
+import traceback
+
 from vero.metrics import MetricBase
 import gc
 from torch.nn.functional import cosine_similarity
@@ -116,6 +118,7 @@ class BleurtScore(MetricBase):
             return round(final_score, 2)
 
         except Exception as e:
+            print('BLEURT score calculation failed\nError:', traceback.format_exc())
             # logger.error('BLEURT score calculation failed\nError:', e)
             return None
 

@@ -1,3 +1,5 @@
+import traceback
+
 from vero.metrics import MetricBase
 import numpy as np
 import math
@@ -44,4 +46,5 @@ class MeanAP(MetricBase):
             return map
         except Exception as e:
             # logger.info('Exception occured during MAP calculation\nError:', e)
+            print('Exception occured during MAP calculation\nError:', traceback.format_exc())
             return None

@@ -1,3 +1,5 @@
+import traceback
+
 from vero.metrics import MetricBase
 import gc
 from .semscore import EmbeddingModelWrapper
@@ -60,6 +62,7 @@ class SemScore(MetricBase):
                 return round(avg_cs, 2)
         except Exception as e:
             # logger.info('SEMscore calculation failed\nError:', e)
+            print('Error calculating Sem Score\nError:', traceback.format_exc())
             return None
 
     def __exit__(self, exc_type, exc_value, traceback):

@@ -1,3 +1,5 @@
+import traceback
+
 from vero.metrics import MetricBase
 import gc
 from .bartscore import BARTScorer
@@ -57,7 +59,9 @@ class BartScore(MetricBase):
                 avg_score = sum_score / len(reference)
                 return round(avg_score, 2)
         except Exception as e:
+            print('Error calculating Bart Score\nError:', traceback.format_exc())
             # logger.error('Error calculating Bart Score\nError:', e)
+
             return None
         # score = scorer.multi_ref_score([ref],[candidate],batch_size = 6)
 

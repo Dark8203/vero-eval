@@ -1,3 +1,5 @@
+import traceback
+
 from vero.metrics import MetricBase
 import numpy as np
 import math
@@ -74,4 +76,5 @@ class RerankerNDCG(MetricBase):
             return ndcg_k
         except Exception as e:
             # logger.info('Exception occured during NDCG@k calculation\nError:', e)
+            print('Exception occured during Reranker NDCG calculation\nError:', traceback.format_exc())
             return None

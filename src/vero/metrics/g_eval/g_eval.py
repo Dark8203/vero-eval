@@ -1,3 +1,5 @@
+import traceback
+
 from vero.metrics import MetricBase
 import gc
 import os
@@ -143,6 +145,7 @@ class GEvalScore(MetricBase):
 
         except Exception as e:
             # logger.error('Error in generating g-eval score\nError', e)
+            print('Error in generating g-eval score\nError:', traceback.format_exc())
             return None
 
 

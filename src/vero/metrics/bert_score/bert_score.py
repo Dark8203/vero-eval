@@ -2,6 +2,7 @@ from vero.metrics import MetricBase
 import gc
 from bert_score import BERTScorer
 import torch
+import traceback
 # from tracing_components import logger
 
 
@@ -57,6 +58,7 @@ class BertScore(MetricBase):
                 avg_r = sum_r / len(reference)
                 return (round(avg_p, 2), round(avg_r, 2), round(avg_f1, 2))
         except Exception as e:
+            print('Error calculating Bert Score\nError:', traceback.format_exc())
             # logger.info('BERTscore calculation failed\nError:', e)
             return None
 

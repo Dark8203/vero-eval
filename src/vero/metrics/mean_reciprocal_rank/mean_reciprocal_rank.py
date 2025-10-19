@@ -1,3 +1,5 @@
+import traceback
+
 from vero.metrics import MetricBase
 import numpy as np
 import math
@@ -44,4 +46,5 @@ class MeanRR(MetricBase):
             return mrr
         except Exception as e:
             # logger.info('Exception occured during MRR calculation\nError:', e)
+            print('Exception occured during MRR calculation\nError:', traceback.format_exc())
             return None

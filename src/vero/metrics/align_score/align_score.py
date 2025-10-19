@@ -1,3 +1,5 @@
+import traceback
+
 from vero.metrics import MetricBase
 import gc
 from .alignscore import AlignScorer
@@ -57,6 +59,7 @@ class AlignScore(MetricBase):
 
         except Exception as e:
             # logger.error('AlignScore calculation failed\nError:', e)
+            print('AlignScore calculation failed\nError:', traceback.format_exc())
             return None
 
 

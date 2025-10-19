@@ -1,3 +1,5 @@
+import traceback
+
 from vero.metrics import MetricBase
 import numpy as np
 import math
@@ -17,6 +19,7 @@ def true_ranks(reranked_docs: list, ground_truth: list) -> list | None:
             ranks.append(s)
         return ranks
     except Exception as e:
+        print('Exception occured during rank calculation\nError:', traceback.format_exc())
         # logger.info('Exception occured during rank calculation\nError:', e)
         return None
 
@@ -66,5 +69,6 @@ class CumulativeNDCG(MetricBase):
                     ndcg.append(round(dcg / idcg, 2))
             return ndcg
         except Exception as e:
+            print('Exception occured during cumulative NDCG calculation\nError:', traceback.format_exc())
             # logger.info('Exception occured during NDCG calculation\nError:', e)
             return None
