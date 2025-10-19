@@ -64,7 +64,7 @@ class ReportGenerator:
             messages = prompt.invoke({'pipeline_configuration':pipeline_configuration,'metrics_definitions':metrics_definition,'evaluation_results':evaluation_results})
 
             result = self.llm.invoke(messages)
-            print(result)
+            # print(result)
             return {'data': {'parser_agent':result.content}}
 
         #TODO:make specialised heuristics and review definitions for stress test; Added mean to retriever and reranker metrics
