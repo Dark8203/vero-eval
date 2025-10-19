@@ -105,3 +105,9 @@
 # evaluator.evaluate_reranker('test_dataset.csv', 'ranked_chunks_data.csv')
 
 # evaluator.evaluate_retrieval('testing.csv', 'ranked_chunks_data.csv')
+#
+# from vero.report_generation_workflow import ReportGenerator
+#
+# report_generator = ReportGenerator()
+#
+# report_generator.generate_report('pipe_config_data.json','Generation_Scores.csv','Retrieval_Scores.csv','Reranked_Scores.csv')
