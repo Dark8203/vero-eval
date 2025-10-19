@@ -1,0 +1,31 @@
+{
+  "primary_indicator": {
+    "name": "Ranking Uplift",
+    "description": "The most important analysis for a reranker is the change (uplift or drop) in ranking metrics like NDCG@k or MRR from before to after its execution. This comparison will be handled by the Synthesis Agent. Your primary role is to evaluate the final ranking quality."
+  },
+  "metrics": {
+    "final_ranking_quality": {
+      "name": "Final Ranking Quality",
+      "examples": ["NDCG@k", "Modified NDCG@k", "MAP", "MRR"],
+      "description": "These scores reflect the quality of the final, re-ordered list of documents sent to the generator.",
+      "scoring_tiers": [
+        {
+          "range": "> 0.85",
+          "quality": "Excellent",
+          "interpretation": "The reranker is successfully and consistently promoting the most relevant documents to the very top."
+        },
+        {
+          "range": "0.75 - 0.85",
+          "quality": "Good",
+          "interpretation": "This indicates a solid and effective ordering of the context."
+        },
+        {
+          "range": "< 0.75",
+          "quality": "Moderate to Poor",
+          "interpretation": "This score suggests the reranker is not very effective."
+        }
+      ]
+    }
+  },
+  "critical_weakness": "If you are able to infer that a final ranking score is lower than the initial retriever's ranking score, you must flag this as a severe pipeline failure, as the reranker is actively harming performance."
+}

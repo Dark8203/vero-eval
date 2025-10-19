@@ -1,0 +1,114 @@
+{
+  "pipeline_name": "Production-Grade RAG Pipeline (Exhaustive)",
+  "pipeline_description": "An exhaustive, production-ready RAG pipeline configuration. This setup details all tweakable parameters for high-performance models, a dedicated reranker, and a scalable vector database, complete with default values and explanations for fine-tuning.",
+  "ingestion_pipeline": {
+    "loader": {
+      "name": "CSVLoader",
+      "parameters": {
+        "file_path": "test_dataset (1).xlsx - Sheet1.csv",
+        "source_column": "Question",
+        "content_columns": [
+          "Answer"
+        ],
+        "metadata_columns": [
+          "Chunk IDs",
+          "Less Relevant Chunk IDs",
+          "Difficulty",
+          "Rationale"
+        ]
+      }
+    },
+    "splitter": {
+      "name": "RecursiveCharacterTextSplitter",
+      "parameters": {
+        "chunk_size": 1024,
+        "chunk_overlap": 150,
+        "length_function": "len",
+        "separators": [
+          "\n\n",
+          "\n",
+          ". ",
+          " ",
+          ""
+        ],
+        "keep_separator": true,
+        "strip_whitespace": true
+      }
+    },
+    "embedding_model": {
+      "name": "HuggingFaceBGEEmbeddings",
+      "parameters": {
+        "model_name": "BAAI/bge-large-en-v1.5",
+        "model_kwargs": {
+          "device": "cuda"
+        },
+        "encode_kwargs": {
+          "normalize_embeddings": true
+        }
+      }
+    },
+    "vector_store": {
+      "name": "Qdrant",
+      "parameters": {
+        "url": "http://localhost:6333",
+        "collection_name": "production_q_and_a",
+        "prefer_grpc": true,
+        "api_key": "${QDRANT_API_KEY}",
+        "distance_func": "Cosine"
+      }
+    }
+  },
+  "query_pipeline": {
+    "retriever": {
+      "name": "VectorStoreRetriever",
+      "parameters": {
+        "vector_store": "Qdrant",
+        "search_type": "similarity_score_threshold",
+        "search_kwargs": {
+          "k": 20,
+          "score_threshold": 0.7,
+          "fetch_k": 50,
+          "lambda_mult": 0.5
+        }
+      }
+    },
+    "reranker": {
+      "name": "CrossEncoderReranker",
+      "parameters": {
+        "model_name": "BAAI/bge-reranker-large",
+        "top_n": 5,
+        "device": "cuda",
+        "batch_size": 8,
+        "max_length": 512
+      }
+    },
+    "generator": {
+      "name": "OpenAI",
+      "parameters": {
+        "model_name": "gpt-4-turbo",
+        "api_key": "${OPENAI_API_KEY}",
+        "temperature": 0.1,
+        "max_tokens": 2048,
+        "top_p": 1.0,
+        "frequency_penalty": 0.0,
+        "presence_penalty": 0.0,
+        "n": 1,
+        "stream": false,
+        "logprobs": null,
+        "stop": null,
+        "timeout": 60,
+        "logit_bias": {}
+      }
+    },
+    "prompt_template": {
+      "name": "ChatPromptTemplate",
+      "parameters": {
+        "template": "You are an expert Q&A system. Use the following retrieved context to answer the user's question. If you don't know the answer, state that you do not have enough information. Be concise and accurate.\n\nContext:\n{context}\n\nQuestion:\n{question}\n\nAnswer:"
+      }
+    }
+  },
+  "deployment_environment": {
+    "platform": "Kubernetes",
+    "notes": "Configuration assumes a scalable, containerized deployment. API keys should be managed via secrets. Monitoring for latency, cost, and response quality is critical."
+  }
+}

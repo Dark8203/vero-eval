@@ -1,0 +1,279 @@
+{
+  "evaluation_metrics": {
+    "generation_metrics": [
+      {
+        "name": "BERTScore",
+        "scorer": "BERTScorer",
+        "inputs": [
+          "retrieved_context",
+          "generated_output"
+        ],
+        "outputs": {
+          "precision": "float",
+          "recall": "float",
+          "f1_score": "float"
+        },
+        "description": "Uses BERT embeddings to compute similarity between candidate and reference sentences."
+      },
+      {
+        "name": "ROUGE-L",
+        "scorer": "ROUGE-L",
+        "inputs": [
+          "retrieved_context",
+          "generated_output"
+        ],
+        "outputs": {
+          "precision": "float",
+          "recall": "float",
+          "f1_score": "float"
+        },
+        "description": "Focuses on the Longest Common Subsequence (LCS) between a generated summary and a reference summary."
+      },
+      {
+        "name": "SEMScore",
+        "scorer": "Cosine Similarity on Embeddings",
+        "inputs": [
+          "retrieved_context",
+          "generated_output"
+        ],
+        "outputs": {
+          "SEMScore": "float"
+        },
+        "description": "Calculates cosine similarity between the embeddings of the retrieved context and the generated output.",
+        "inference": {
+          "closer_to_1": "more semantically similar",
+          "closer_to_0": "unrelated",
+          "negative_score": "semantically opposite"
+        }
+      },
+      {
+        "name": "BleurtScore (Weighted Semantic Similarity)",
+        "scorer": "Custom BleurtScore implementation with weighted sum",
+        "inputs": [
+          "retrieved_context",
+          "generated_output or user_query"
+        ],
+        "outputs": {
+          "Weighted_BleurtScore": "float"
+        },
+        "description": "A unique implementation of BleurtScore that calculates a weighted sum to provide a more nuanced score. Can be used as both a generation and retriever metric.",
+        "use_cases": {
+          "as_generation_metric": "Gives insights on which chunks play a major part in output generation, receiving higher weights.",
+          "as_retriever_metric": "Provides insights if the retriever is good at capturing conceptual and semantic relationships, even if it misses the exact answer."
+        },
+        "inference": {
+          "closer_to_1": "high semantic similarity",
+          "closer_to_0": "low semantic similarity"
+        }
+      },
+      {
+        "name": "AlignScore",
+        "scorer": "AlignScore model",
+        "inputs": [
+          "retrieved_context",
+          "generated_output"
+        ],
+        "outputs": {
+          "AlignScore": "float"
+        },
+        "description": "Measures the faithfulness and factual consistency of the generated answer to the retrieved context.",
+        "inference": {
+          "closer_to_1": "high factual consistency",
+          "closer_to_0": "low factual consistency"
+        }
+      },
+      {
+        "name": "BartScore",
+        "scorer": "BartScorer",
+        "inputs": [
+          "retrieved_context",
+          "generated_output"
+        ],
+        "outputs": {
+          "BartScore": "float"
+        },
+        "description": "A comparison score that is meaningful only when comparing two models or RAG pipeline versions. A higher score indicates better generation capabilities."
+      },
+      {
+        "name": "G-Eval",
+        "scorer": "Custom G-Eval implementation",
+        "inputs": {
+          "required": [
+            "references",
+            "candidate"
+          ],
+          "optional": [
+            "custom_prompt",
+            "metric_name",
+            "metric_description",
+            "polling_flag",
+            "polling_number"
+          ]
+        },
+        "outputs": {
+          "G-Eval_Score": "float"
+        },
+        "description": "Calculates a weighted sum of scores with their linear probabilities. Supports custom prompts and polling for robust evaluation."
+      }
+    ],
+    "ranking_metrics": [
+      {
+        "name": "Mean Reciprocal Rank (MRR)",
+        "implementation": "Direct implementation",
+        "inputs": [
+          "reranked_docs",
+          "ground_truth"
+        ],
+        "outputs": {
+          "MRR": "float"
+        },
+        "description": "Measures the average of the reciprocal ranks of the first correct answer. It is the mean score."
+      },
+      {
+        "name": "Mean Average Precision (MAP)",
+        "implementation": "Direct implementation",
+        "inputs": [
+          "reranked_docs",
+          "ground_truth"
+        ],
+        "outputs": {
+          "MAP": "float"
+        },
+        "description": "Calculates the mean of the average precision scores for each query. It is the mean score."
+      },
+      {
+        "name": "NDCG@k",
+        "implementation": "Direct implementation",
+        "inputs": [
+          "reranked_docs",
+          "ground_truth",
+          "k_value"
+        ],
+        "outputs": {
+          "NDCG@k": "float"
+        },
+        "description": "Normalized Discounted Cumulative Gain at a specific cutoff 'k'. It is the mean score."
+      },
+      {
+        "name": "Modified NDCG@k",
+        "implementation": "Unique implementation",
+        "inputs": [
+          "reranked_docs",
+          "ground_truth",
+          "k_value"
+        ],
+        "outputs": {
+          "NDCG@k": "float"
+        },
+        "description": "A custom implementation of NDCG@k to evaluate the cumulative performance of both the retriever and reranker. It is the mean score."
+      }
+    ],
+    "retriever_metrics": {
+      "variables": {
+        "A": "Retrieved Chunks: The set of all chunks returned by the retriever.",
+        "B": "True Chunks: The set of ground truth chunks that are relevant to the query.",
+        "C": "Cited Chunks: The set of chunks that are actually used or cited in the generated answer."
+      },
+      "metrics": [
+        {
+          "name": "Mean Recall Score",
+          "formula": "|A ∩ B| / |B|",
+          "inputs": [
+            "Retrieved Chunks (A)",
+            "True Chunks (B)"
+          ],
+          "output": {
+            "type": "float",
+            "range": "0.0 to 1.0"
+          },
+          "description": "Measures the proportion of all relevant chunks that were successfully retrieved. It is the mean score."
+        },
+        {
+          "name": "Mean Precision Score",
+          "formula": "|A ∩ B| / |A|",
+          "inputs": [
+            "Retrieved Chunks (A)",
+            "True Chunks (B)"
+          ],
+          "output": {
+            "type": "float",
+            "range": "0.0 to 1.0"
+          },
+          "description": "Measures the proportion of retrieved chunks that are actually relevant. It is the mean score."
+        },
+        {
+          "name": "Numerical Hallucination Score",
+          "calculation": "exact_match(numericals_in_final_answer) / count(numericals_in_all_retrieved_chunks)",
+          "inputs": [
+            "final_answer",
+            "all_retrieved_chunks"
+          ],
+          "output": {
+            "type": "float",
+            "range": "0.0 to 1.0"
+          },
+          "description": "Calculates the ratio of correctly reproduced numerical values from the context in the final answer."
+        },
+        {
+          "name": "Citation Score",
+          "formula": "|C ∩ B| / |C|",
+          "inputs": [
+            "Cited Chunks (C)",
+            "True Chunks (B)"
+          ],
+          "output": {
+            "type": "float",
+            "range": "0.0 to 1.0"
+          },
+          "description": "Measures the precision of the chunks that were cited in the final answer."
+        },
+        {
+          "name": "Mean Context Sufficiency Score",
+          "calculation": "LLM-based evaluation",
+          "inputs": [
+            "user_query",
+            "retrieved_context"
+          ],
+          "output": {
+            "type": "float",
+            "range": "0.0 to 1.0 (normalized from a 1-5 scale)"
+          },
+          "description": "An LLM evaluates whether the retrieved context is sufficient to answer the user's query, rated on a scale of 1-5 and then normalized. It is the mean score."
+        }
+      ],
+      "stress_tests": [
+        {
+          "name": "Context Sequence Length Stress Test",
+          "objective": "To determine if the retrieval system has a bias towards prioritizing chunks of a specific length (e.g., longer chunks over shorter ones, or vice versa) irrespective of relevance.",
+          "methodology": "Analyze the correlation between chunk length and retrieval rank across a large set of queries. Flag systems where a significant correlation is found, as it might indicate a bias in the retrieval algorithm.",
+          "output": {
+            "type": "Correlation analysis report",
+            "details": "A report detailing the relationship between chunk length and retrieval position."
+          }
+        },
+        {
+          "name": "Chunking Strategy Check",
+          "objective": "To identify if the chunking strategy splits critical information across chunk boundaries, making it difficult for the retriever to fetch the complete context or for the generator to synthesize a correct answer.",
+          "methodology": "For queries where the ground truth is known to exist near a chunk boundary, analyze if the retriever successfully fetches all necessary adjacent chunks. This can be done via manual inspection of failed cases or automated checks.",
+          "output": {
+            "type": "Error analysis report",
+            "details": "A qualitative report with examples of queries that failed due to information being missed at chunk boundaries."
+          }
+        },
+        {
+          "name": "Domain-Specific Term Presence",
+          "objective": "To verify that important, domain-specific terminology from the query or context is correctly identified and included in the final generated answer when relevant.",
+          "methodology": "Create a pre-defined list of key domain-specific terms (e.g., 'beta-carotene'). For queries involving these terms, programmatically check for their presence in the retrieved context and the final generated answer.",
+          "inputs": [
+            "generated_answer",
+            "list_of_domain_terms"
+          ],
+          "output": {
+            "type": "Boolean (Present/Absent) or Coverage Score",
+            "details": "A simple true/false for the presence of a term, or a score representing the percentage of required terms that were correctly included in the answer."
+          }
+        }
+      ]
+    }
+  }
+}

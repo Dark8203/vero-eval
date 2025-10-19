@@ -1,0 +1,90 @@
+{
+  "metrics": {
+    "recall_score": {
+      "name": "Recall Score",
+      "criticality": "Most Critical Metric",
+      "description": "This tells you if the correct information was found at all.",
+      "scoring_tiers": [
+        {
+          "range": "> 0.90",
+          "quality": "Excellent",
+          "interpretation": "The retriever is rarely the bottleneck and almost always finds the necessary context."
+        },
+        {
+          "range": "0.80 - 0.90",
+          "quality": "Good",
+          "interpretation": "A solid, reliable foundation for the pipeline."
+        },
+        {
+          "range": "0.70 - 0.80",
+          "quality": "Moderate",
+          "interpretation": "The retriever may fail to find the necessary context in a noticeable number of complex cases."
+        },
+        {
+          "range": "< 0.70",
+          "quality": "Poor",
+          "interpretation": "This is a major pipeline bottleneck that severely limits the potential for a correct final answer."
+        }
+      ]
+    },
+    "context_sufficiency_score": {
+      "name": "Context Sufficiency Score",
+      "description": "This LLM-based metric directly evaluates if the retrieved context is enough to answer the query.",
+      "scoring_tiers": [
+        {
+          "range": "> 0.90",
+          "equivalent_scale": "4.5/5",
+          "quality": "Excellent"
+        },
+        {
+          "range": "0.80 - 0.90",
+          "equivalent_scale": "4.0-4.5/5",
+          "quality": "Good"
+        },
+        {
+          "range": "< 0.80",
+          "quality": "Moderate to Poor",
+          "interpretation": "A strong signal of retriever failure."
+        }
+      ]
+    },
+    "ranking_quality": {
+      "name": "Ranking Quality",
+      "examples": ["MRR", "NDCG@k"],
+      "description": "These metrics evaluate how well the retrieved documents are initially ranked.",
+      "scoring_tiers": [
+        {
+          "range": "> 0.80",
+          "quality": "Excellent",
+          "interpretation": "The most relevant documents are consistently placed at the top."
+        },
+        {
+          "range": "0.70 - 0.80",
+          "quality": "Good",
+          "interpretation": "A solid ranking performance."
+        },
+        {
+          "range": "< 0.70",
+          "quality": "Moderate to Poor",
+          "interpretation": "Indicates that while the correct documents might be found (high Recall), they are buried in the results, which is a problem for the downstream components."
+        }
+      ]
+    },
+    "precision_score": {
+      "name": "Precision Score",
+      "description": "This measures how much irrelevant 'noise' is included in the retrieved set.",
+      "scoring_tiers": [
+        {
+          "range": "> 0.80",
+          "quality": "Good",
+          "interpretation": "The retrieved context is clean and focused."
+        },
+        {
+          "range": "< 0.80",
+          "quality": "Moderate to Poor",
+          "interpretation": "The generator has to sift through some irrelevant context, which can increase the risk of hallucinations."
+        }
+      ]
+    }
+  }
+}

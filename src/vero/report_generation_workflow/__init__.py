@@ -1,0 +1,1 @@
+from .workflow_process import ReportGenerator

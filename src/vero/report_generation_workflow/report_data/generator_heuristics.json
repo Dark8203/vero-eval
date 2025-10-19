@@ -1,0 +1,126 @@
+{
+  "analysis_categories": [
+    {
+      "category_name": "Factual Grounding & Faithfulness",
+      "priority": "Highest Priority",
+      "description": "These metrics measure trust and reliability.",
+      "metrics": [
+        {
+          "name": "AlignScore",
+          "scoring_tiers": [
+            {
+              "range": "> 0.90",
+              "quality": "Excellent",
+              "interpretation": "The generated answer is highly faithful to the provided context."
+            },
+            {
+              "range": "0.80 - 0.90",
+              "quality": "Good",
+              "interpretation": "Generally reliable with minor, infrequent inconsistencies."
+            },
+            {
+              "range": "0.70 - 0.80",
+              "quality": "Moderate",
+              "interpretation": "Indicates some level of hallucination or unsupported claims."
+            },
+            {
+              "range": "< 0.70",
+              "quality": "Poor",
+              "interpretation": "The model cannot be trusted to be factually consistent."
+            }
+          ]
+        },
+        {
+          "name": "Numerical Hallucination Score",
+          "description": "This measures the accuracy of numbers. A higher score is better.",
+          "scoring_tiers": [
+            {
+              "range": "> 0.95",
+              "quality": "Excellent",
+              "interpretation": "The model is highly reliable with numerical data."
+            },
+            {
+              "range": "0.85 - 0.95",
+              "quality": "Good"
+            },
+            {
+              "range": "< 0.85",
+              "quality": "Moderate to Poor",
+              "interpretation": "Indicates the model is unreliable for any task involving specific numbers."
+            }
+          ]
+        },
+        {
+          "name": "Citation Score",
+          "description": "This measures the precision of citations.",
+          "scoring_tiers": [
+            {
+              "range": "> 0.90",
+              "quality": "Excellent",
+              "interpretation": "The provided citations are highly relevant and build user trust."
+            },
+            {
+              "range": "< 0.90",
+              "quality": "Moderate to Poor",
+              "interpretation": "Citations may be irrelevant or incorrect, undermining the system's verifiability."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "category_name": "Semantic Quality & Relevance",
+      "description": "These metrics measure how well-written and on-topic the answer is.",
+      "metrics": [
+        {
+          "name": "Semantic Similarity Scores",
+          "examples": ["BERTScore (f1)", "BleurtScore", "SEMScore"],
+          "description": "Strong indicators of semantic similarity.",
+          "scoring_tiers": [
+            {
+              "range": "> 0.92",
+              "quality": "Excellent",
+              "interpretation": "The answer is very close in meaning to the ideal or source context."
+            },
+            {
+              "range": "0.88 - 0.92",
+              "quality": "Good",
+              "interpretation": "A coherent and relevant answer."
+            },
+            {
+              "range": "< 0.88",
+              "quality": "Moderate",
+              "interpretation": "The answer might be factually okay but poorly phrased or slightly off-topic."
+            }
+          ]
+        },
+        {
+          "name": "Comparative Scores",
+          "examples": ["G-Eval", "BartScore"],
+          "description": "Often comparative and context-dependent.",
+          "scoring_notes": [
+            {
+              "metric": "G-Eval",
+              "note": "For a score on a 1-5 scale, a score > 4.0 is considered Good, and > 4.5 is Excellent."
+            },
+            {
+              "metric": "BartScore",
+              "note": "A higher score is better when comparing two models. Flag any score that is significantly lower than a known baseline as a weakness."
+            }
+          ]
+        },
+        {
+          "name": "ROUGE-L (f1)",
+          "description": "A lexical (keyword) based metric.",
+          "scoring_tiers": [
+            {
+              "range": "> 0.50",
+              "quality": "Good",
+              "interpretation": "Can be considered good, but it is a much weaker indicator of quality than semantic scores."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
