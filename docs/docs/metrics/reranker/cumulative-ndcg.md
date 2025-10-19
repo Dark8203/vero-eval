@@ -12,7 +12,7 @@ Unique implementation of NDCG@k that can be used to evaluate the cumulative perf
 
 ### **Example**
 ```py
-from vero import CumulativeNDCG
+from vero.metrics import CumulativeNDCG
 
 #example inputs
 #rr is the reranked results from the retriever

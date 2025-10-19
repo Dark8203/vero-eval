@@ -11,7 +11,7 @@ It is an automatic evaluation metric for text generation tasks that measures the
 
 ### **Example**
 ```py
-from vero import BertScore
+from vero.metrics import BertScore
 
 #example inputs
 #chunks_list = ["The cat sat on the mat.", "The dog barked at the mailman."]

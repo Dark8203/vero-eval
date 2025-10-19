@@ -12,14 +12,14 @@ Determines whether the retrieved set is sufficient to cover all ground truth ite
 
 ### **Example**
 ```py
-from vero import SufficiencyScore
+from vero.metrics import SufficiencyScore
 
 #example inputs
-#ch_r is the retrieved citations from the retriever
-#ch_t is the ground truth citations
-ch_r = [1,2,3,5,6]
-ch_t = [2,3,4]
-ss = SufficiencyScore(ch_r, ch_t)
+#context
+#user_query
+query = 'When was the Eiffel Tower built and where is it located?'
+context_retrieved = ['The Eiffel Tower was built between 1887 and 1889 and is located in Paris, France.','Paris is the capital of France and known for the Louvre museum.','The Great Wall of China is more than 13,000 miles long and was built across northern China.']
+ss = SufficiencyScore(context_retrieved,query,api_key)
 print(ss.evaluate())
 ```
 

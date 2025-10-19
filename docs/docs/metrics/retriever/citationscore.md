@@ -12,7 +12,7 @@ Measures the overlap of retrieved items with ground truth citations.
 
 ### **Example**
 ```py
-from vero import CitationScore
+from vero.metrics import CitationScore
 
 #example inputs
 #ch_r is the retrieved citations from the retriever

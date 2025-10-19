@@ -18,14 +18,15 @@ An LLM-based evaluation framework where a large language model directly scores t
 
 ### **Example**
 ```py
-from vero import GEvalScore
-
 #example inputs
-#chunks_list = ["The cat sat on the mat.", "The dog barked at the mailman."]
-#answers_list = ["A cat is sitting on a mat and a dog is barking at the mailman."]
-with GEvalScore(api_key) as g_eval:
-    g_eval_results = [g_eval.evaluate(chunk,ans, metric='Faithfulness') for chunk, ans in tqdm(zip(chunks_list, answers_list), total=len(df_new))]
-print(g_eval_results)
+#answer
+#context_retrieved
+answer = 'The Eiffel Tower was built in 1889 and is located in louvre museum, France.'
+context_retrieved = ['The Eiffel Tower was built between 1887 and 1889 and is located in Paris, France.','Paris is the capital of France and known for the Louvre museum.','The Great Wall of China is more than 13,000 miles long and was built across northern China.']
+
+with GEvalScore(api_key) as ge:
+    result = ge.evaluate(context_retrieved,answer,'Correctness',polling=True)
+    print(result)
 ```
 ### **Output**
 ```text

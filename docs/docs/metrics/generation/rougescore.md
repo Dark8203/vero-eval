@@ -11,7 +11,7 @@ ROUGE-L focuses on the Longest Common Subsequence (LCS) between generated and re
 
 ### **Example**
 ```py
-from vero import RougeScore
+from vero.metrics import RougeScore
 
 #example inputs
 #chunks_list = ["The cat sat on the mat.", "The dog barked at the mailman."]

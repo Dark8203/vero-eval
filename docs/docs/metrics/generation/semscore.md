@@ -18,7 +18,7 @@ A metric that measures semantic similarity between candidate (generated) text an
 
 ### **Example**
 ```py
-from vero import SEMScore
+from vero.metrics import SEMScore
 
 #example inputs
 #chunks_list = ["The cat sat on the mat.", "The dog barked at the mailman."]

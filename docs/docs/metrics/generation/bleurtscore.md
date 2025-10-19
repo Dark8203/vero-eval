@@ -27,7 +27,7 @@ An advanced metric based on BLEURT that produces a more nuanced weighted similar
 
 ### **Example**
 ```py
-from vero import BleurtScore
+from vero.metrics import BleurtScore
 
 #example inputs
 #chunks_list = ["The cat sat on the mat.", "The dog barked at the mailman."]

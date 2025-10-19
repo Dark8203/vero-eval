@@ -20,7 +20,7 @@ It uses a unified alignment function (often built on a pretrained alignment mode
 
 ### **Example**
 ```py
-from vero import AlignScore
+from vero.metrics import AlignScore
 
 with AlignScore() as ascore:
     # evaluate many (context, claim) pairs

@@ -12,7 +12,7 @@ Normalized Discounted Cumulative Gain for ranking metrics using graded relevance
 
 ### **Example**
 ```py
-from vero import RerankerNDCG
+from vero.metrics import RerankerNDCG
 
 #example inputs
 #rr is the reranked results from the retriever

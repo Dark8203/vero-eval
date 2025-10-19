@@ -12,7 +12,7 @@ Mean Reciprocal Rank: for each query, take reciprocal rank of first relevant ite
 
 ### **Example**
 ```py
-from vero import MeanRR
+from vero.metrics import MeanRR
 
 #example inputs
 #rr is the reranked results from the retriever

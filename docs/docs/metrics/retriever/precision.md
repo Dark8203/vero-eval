@@ -12,7 +12,7 @@ Measures how many retrieved items are relevant (i.e. in ground truth).
 
 ### **Example**
 ```py
-from vero import PrecisionScore
+from vero.metrics import PrecisionScore
 
 #example inputs
 #ch_r is the retrieved citations from the retriever

@@ -12,7 +12,7 @@ Mean Average Precision: average over queries of the average precision value.
 
 ### **Example**
 ```py
-from vero import MeanAP
+from vero.metrics import MeanAP
 
 #example inputs
 #rr is the reranked results from the retriever

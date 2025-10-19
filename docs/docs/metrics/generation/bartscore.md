@@ -11,7 +11,7 @@ A generation evaluation metric that uses a pretrained BART model to assess the q
 
 ### **Example**
 ```py
-from vero import BartScore
+from vero.metrics import BartScore
 
 #example inputs
 #chunks_list = ["The cat sat on the mat.", "The dog barked at the mailman."]

@@ -12,7 +12,7 @@ Measures how many ground truth items are retrieved.
 
 ### **Example**
 ```py
-from vero import RecallScore
+from vero.metrics import RecallScore
 
 #example inputs
 #ch_r is the retrieved citations from the retriever
