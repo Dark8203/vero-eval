@@ -7,7 +7,6 @@ import torch
 
 # Check if a GPU is available and set the device accordingly
 device = "cuda" if torch.cuda.is_available() else "cpu"
-print(f"Using device: {device}")
 
 class AlignScore(MetricBase):
     '''

@@ -1,8 +1,9 @@
-from .metrics import *
+from vero.metrics import *
 from tqdm import tqdm
 import pandas as pd
 import ast
 import re
+import math
 from typing import Any
 
 METRICS_REGISTRY = {
@@ -167,7 +168,7 @@ class Evaluator:
 
 
         df_new = pd.read_csv(data_path)
-        chunks_list = df_new['Context'].apply(extract_page_content).tolist()
+        chunks_list = df_new['Context Retrieved'].apply(extract_page_content).tolist()
 
         df_new_2 = pd.DataFrame(columns=['Retrieved Chunk IDs','True Chunk IDs'])
         df_new_2['Retrieved Chunk IDs'] = chunks_list
@@ -186,6 +187,7 @@ class Evaluator:
 
         df_new_2.to_csv('ranked_chunks_data.csv', index=False)
 
+    #here also ground truth path is placeholder for now
     def evaluate_reranker(self, ground_truth_path: str | None = None, retriever_data_path: str | None = None):
         if retriever_data_path is None:
             raise ValueError("Data path must be provided for reranker evaluation.")
@@ -195,24 +197,26 @@ class Evaluator:
         true_chunks = df['True Chunk IDs'].apply(ast.literal_eval).tolist()
         true_ranked_chunks = df['Ranked All Chunk IDs'].apply(ast.literal_eval).tolist()
 
+        print(ret_chunks, true_chunks, true_ranked_chunks)
 
         mean_ap = MeanAP(ret_chunks, true_chunks)
         mean_ap_result = mean_ap.evaluate()
+
+        print(mean_ap_result)
 
         mean_rr = MeanRR(ret_chunks, true_chunks)
         mean_rr_result = mean_rr.evaluate()
 
         reranker_ndcg = RerankerNDCG(ret_chunks, true_ranked_chunks)
         reranker_ndcg_result = reranker_ndcg.evaluate()
+        reranker_ndcg_result_avg = round(sum(reranker_ndcg_result) / len(reranker_ndcg_result), 2)
 
         cumulative_ndcg = CumulativeNDCG(ret_chunks, true_ranked_chunks)
         cumulative_ndcg_result = cumulative_ndcg.evaluate()
+        cumulative_ndcg_result_avg = round(sum(cumulative_ndcg_result) / len(cumulative_ndcg_result), 2)
 
-        score_df = pd.DataFrame()
-        score_df['Mean Average Precision'] = mean_ap_result
-        score_df['Mean Reciprocal Rank'] = mean_rr_result
-        score_df['Reranker NDCG'] = reranker_ndcg_result
-        score_df['Cumulative NDCG'] = cumulative_ndcg_result
+        score_df = pd.DataFrame(columns=['Mean Average Precision', 'Mean Reciprocal Rank', 'Reranker NDCG', 'Cumulative NDCG'])
+        score_df.loc[0] = [mean_ap_result,mean_rr_result, reranker_ndcg_result_avg, cumulative_ndcg_result_avg]
 
         score_df.to_csv('Reranked_Scores.csv')
 
@@ -220,7 +224,7 @@ class Evaluator:
 
 
 
-    def evaluate_retrieval(self, ground_truth_path: str | None = None, retriever_data_path: str | None = None):
+    def evaluate_retrieval(self, data_path: str | None = None, retriever_data_path: str | None = None):
         if retriever_data_path is None:
             raise ValueError("Data path must be provided for retrieval evaluation.")
 
@@ -242,12 +246,12 @@ class Evaluator:
             matches = re.findall(pattern, text_blob)
             return matches
 
-        df_new = pd.read_csv(ground_truth_path)
+        df_new = pd.read_csv(data_path)
         contexts = df_new['Context Retrieved'].apply(extract_page_content).tolist()
         question = df_new['Question'].tolist()
 
         retrieval_sufficiency_score = [SufficiencyScore(context, ques).evaluate() for context, ques in
-                                       zip(contexts, question)]
+                                       tqdm(zip(contexts, question), total=len(df_new))]
 
 
         score_df = pd.DataFrame(

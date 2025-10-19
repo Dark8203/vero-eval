@@ -12,7 +12,6 @@ load_dotenv(find_dotenv())
 
 # Check if a GPU is available and set the device accordingly
 device = "cuda" if torch.cuda.is_available() else "cpu"
-print(f"Using device: {device}")
 
 #TODO:expose openai client for model config
 class GEvalScore(MetricBase):
