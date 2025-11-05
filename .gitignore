@@ -1,5 +1,6 @@
 chroma_rag.db/
 venv/
+report.md
 .venv1
 .venv
 .idea/
@@ -21,3 +22,4 @@ rag_code/rag_data/
 !rag_code/testdata.csv
 !rag_code/Retrieval_Scores_expanded.csv
 !rag_code/ranked_chunks_data.csv
+dist/
