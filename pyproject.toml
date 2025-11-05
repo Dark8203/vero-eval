@@ -37,8 +37,7 @@ dependencies = ["torch",
     "spacy",
     "pytorch-lightning",
     "scikit-learn",
-    "protobuf",
-    "traceback",]
+    "protobuf",]
 
 [project.urls]
 repository = "https://github.com/Dark8203/vero-eval"
