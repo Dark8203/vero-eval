@@ -5,7 +5,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "vero-eval"
-version = "0.0.1.3"
+version = "0.0.1.4"
 maintainers = [
   { name="Vishal Srivastava", email="vishalsrivastava8203@gmail.com" },
     { name="Alakh Agrawal", email="alakhagr@gmail.com" }
