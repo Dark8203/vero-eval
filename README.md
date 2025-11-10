@@ -8,6 +8,9 @@
 * **Modular & Extensible**: Easily plug in new metric classes or custom scoring logic; the framework is designed to grow with your needs.
 * **End-to-End Evaluation**: Combine component metrics to understand the holistic performance of your RAG system — not just individual parts.
 
+## Flowchart
+![flowchart.png](docs/flowchart.png)
+
 ## Project Structure
 ```
 .
