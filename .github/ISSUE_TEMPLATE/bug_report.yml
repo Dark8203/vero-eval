@@ -1,0 +1,14 @@
+name: "🐞 Bug report"
+description: Report a bug
+labels: ["bug"]
+body:
+  - type: textarea
+    attributes:
+      label: "Describe the bug"
+      description: "A clear description of what went wrong"
+  - type: textarea
+    attributes:
+      label: "Steps to reproduce"
+  - type: input
+    attributes:
+      label: "Python version"

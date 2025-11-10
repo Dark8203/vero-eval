@@ -1,0 +1,48 @@
+# CITATION.cff
+cff-version: 1.2.0
+message: >
+  If you use Vero-Eval in your research, please cite it using the metadata below.
+title: "Vero-Eval: The End-to-End LLM Evaluation Framework"
+version: "0.0.1.4"
+date-released: "2025-11-05"
+doi: ""
+url: "https://github.com/vero-eval/vero-eval"
+repository-code: "https://github.com/vero-eval/vero-eval"
+abstract: >
+  Vero-Eval is an open-source Python framework designed to evaluate
+  artificial intelligence and large language model pipelines.
+  It provides modular metrics, automated reporting, and test generation tools
+  for reproducible and transparent LLM evaluation.
+authors:
+  - family-names: "Srivastava"
+    given-names: "Vishal"
+    email: "vishalsrivastava8203@gmail.com"
+    affiliation: "Vero AI Research"
+    orcid: ""
+  - family-names: "Agrawal"
+    given-names: "Alakh"
+    email: "alakhagr@gmail.com"
+    affiliation: "Vero AI Research"
+    orcid: ""
+keywords:
+  - "LLM evaluation"
+  - "Retrieval-Augmented Generation"
+  - "AI benchmarking"
+  - "automated testing"
+  - "data science"
+  - "AI evaluation"
+  - "AI pipelines"
+  - "machine learning"
+  - "natural language processing"
+  - "open source"
+license: "MIT"
+preferred-citation:
+  type: software
+  authors:
+    - family-names: "Srivastava"
+      given-names: "Vishal"
+    - family-names: "Agrawal"
+      given-names: "Alakh"
+  title: "Vero-Eval: The End-to-End LLM Evaluation Framework"
+  year: 2025
+  url: "https://github.com/vero-eval/vero-eval"
