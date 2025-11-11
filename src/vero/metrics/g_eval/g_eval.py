@@ -33,9 +33,8 @@ class GEvalScore(MetricBase):
     name = 'g_eval_score'
 
     def __init__(self,api_key:str | None = None):
-        api_key = os.getenv('VERO_API_KEY')
-        openai_api_key = api_key[19:-23]
-        self.api_key = openai_api_key
+        api_key = os.getenv('OPENAI_API_KEY')
+        self.api_key = api_key
         self.client = OpenAI(api_key=api_key)
 
     def __enter__(self):
