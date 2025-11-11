@@ -1,34 +1,23 @@
 """
 Semantic chunking utilities.
 
-What this module does:
-- Provides a drop-in replacement for LangChain's
-  `RecursiveCharacterTextSplitter.split_documents(...)`, but with semantic
-  grouping of sentences instead of purely size-based splitting.
-- Returns chunked `Document` objects while preserving original metadata and
-  adding `start_index`/`end_index` (character offsets) and `token_count` for
-  provenance and downstream evaluation.
+What this module provides:
+- A drop-in replacement for LangChain's `RecursiveCharacterTextSplitter.split_documents(...)`.
+- Produces chunked `Document` objects that preserve original metadata and add `start_index`, `end_index`, and `token_count` for provenance.
 
-Why this exists (why you need it):
-- Fixed-size chunks can break context in the middle of a thought, which harms
-  retrieval quality. Semantic chunking keeps related sentences together until
-  they drift semantically or hit a size cap, typically improving RAG recall.
+Why use semantic chunking:
+- Fixed-size chunks can split thoughts and reduce retrieval quality.
+- Semantic chunking keeps related sentences together until the topic drifts or a size limit is reached, which usually improves RAG recall.
 
-Where it fits in your code:
-- Replace the two lines where you instantiate
-  `RecursiveCharacterTextSplitter(...)` and call `split_documents(docs)` with
-  the `semantically_chunk_documents(docs, ...)` function from this module.
-  Inputs and outputs mirror the recursive splitter usage (list of `Document`
-  in, list of chunked `Document` out), so the rest of your pipeline need not
-  change.
+How to use it:
+- Replace your `RecursiveCharacterTextSplitter(...)` + `split_documents(docs)` calls with `semantically_chunk_documents(docs, ...)`.
+- Inputs and outputs match the recursive splitter (list of `Document` in, list of `Document` out), so downstream code need not change.
 
 High-level approach:
-- Split each document into sentences (lightweight regex; you can swap in spaCy/NLTK).
+- Split text into sentences (lightweight regex; swap in spaCy/NLTK if desired).
 - Encode sentences with a compact SentenceTransformer model.
-- Greedily grow a chunk by appending the next sentence if it is similar
-  (cosine similarity >= threshold) or until reaching `min_tokens`.
-- Respect `max_tokens` bound; when exceeded or dissimilar, flush the chunk.
-- Optionally carry over a small sentence overlap to the next chunk to boost recall.
+- Greedily grow a chunk by adding the next sentence if it is semantically similar (cosine similarity above a threshold) or until `min_tokens` is reached.
+- Flush a chunk when it becomes dissimilar or would exceed `max_tokens`. Optionally keep a small sentence overlap to boost recall.
 """
 
 import re
@@ -40,21 +29,20 @@ import pandas as pd
 try:
     # Small, fast embedding model family suitable for local semantic grouping
     from sentence_transformers import SentenceTransformer
-except Exception as e:  # pragma: no cover
-    SentenceTransformer = None  # type: ignore
+except Exception as e:
+    SentenceTransformer = None
 
 try:
     # Used only for token length accounting; falls back to whitespace tokens if unavailable
     from transformers import AutoTokenizer
-except Exception:  # pragma: no cover
-    AutoTokenizer = None  # type: ignore
+except Exception:
+    AutoTokenizer = None
 
 try:
     # LangChain core Document (compatible with .model_dump() in recent versions)
     from langchain_core.documents import Document
-except Exception:  # pragma: no cover
-    # Fallback shim if import path changes; provides the minimal shape we need
-    class Document:  # type: ignore
+except Exception:
+    class Document:
         def __init__(self, page_content: str, metadata: Optional[Dict[str, Any]] = None):
             self.page_content = page_content
             self.metadata = metadata or {}
@@ -64,18 +52,26 @@ except Exception:  # pragma: no cover
 
 
 def _split_sentences(text: str) -> List[str]:
-    """Lightweight sentence splitter using regex heuristics.
+    """Lightweight sentence splitter using simple, easy-to-read regex rules.
 
-    Why this exists: Chunking at sentence boundaries reduces semantic
-    discontinuities and yields more coherent chunks than cutting by raw
-    characters.
+    What this function provides:
+    - A lightweight, dependency-minimal splitter that returns sentence-like
+      fragments from a single text string.
 
-    Where it fits: First step of semantic chunking; upstream loaders provide a
-    single `page_content` string, which we segment here before embedding.
+    Why use this splitter:
+    - Keeps chunking dependency-light and fast.
+    - Preserves sentence boundaries so downstream chunking groups natural units
+      of thought.
 
-    For production quality, consider spaCy or NLTK's `sent_tokenize`.
-    This implementation aims to be dependency-light while performing well on
-    common prose.
+    How to use it:
+    - Call with a single document `page_content` string prior to embedding or
+      chunk construction. Swap in spaCy/NLTK for higher accuracy if required.
+
+    High-level approach:
+    - Normalize whitespace, split on terminal punctuation followed by space,
+      and merge very short tails (likely abbrev./noise) back into the
+      previous fragment.
+    - Returns a list of trimmed, non-empty sentence strings.
     """
     text = text.strip()
     if not text:
@@ -103,16 +99,21 @@ def _split_sentences(text: str) -> List[str]:
 def _sentence_spans(text: str, sentences: List[str]) -> List[Optional[tuple]]:
     """Compute (start, end) character spans of each sentence.
 
-    Why this exists: We add `start_index`/`end_index` to chunk metadata for
-    provenance and to mimic `add_start_index=True` behavior from the recursive
-    splitter. Evaluators can trace answers back to source offsets.
+    What this function provides:
+    - A list of (start, end) character offsets for each sentence discovered.
 
-    Where it fits: Used after sentence splitting and before forming chunks so
-    we can aggregate per-sentence offsets to per-chunk offsets.
+    Why use spans:
+    - Enables provenance by attaching `start_index`/`end_index` to chunks so
+      consumers can trace answers back to exact offsets in the source.
 
-    We move a cursor forward to find sentences in order, which is robust to
-    duplicate substrings earlier in the text. Returns None for sentences we
-    fail to re-locate (rare, but possible if the source has altered whitespace).
+    How it works:
+    - Advances a cursor and searches for each sentence sequentially, returning
+      None for any sentence that cannot be re-located (rare, e.g., whitespace
+      normalization differences).
+
+    High-level approach:
+    - Robust to repeated substrings earlier in the text because the search
+      starts at the previous sentence end.
     """
     spans = []
     cursor = 0
@@ -127,13 +128,23 @@ def _sentence_spans(text: str, sentences: List[str]) -> List[Optional[tuple]]:
 
 
 def _load_models(model_name: str):
-    """Load embedding model and tokenizer.
+    """Load embedding and tokenizer components, documented like module top.
 
-    Why this exists: We need sentence embeddings to measure semantic cohesion
-    (via cosine similarity) and a tokenizer to enforce min/max token bounds.
+    What this function provides:
+    - Instantiates a SentenceTransformer embedding model and, when available,
+      an AutoTokenizer for token counting.
 
-    Where it fits: Called once by `semantically_chunk_documents` before
-    processing all documents to avoid repeated model loads.
+    Why load once:
+    - Model loading can be expensive; doing it once per batch of documents
+      avoids repeated overhead.
+
+    How to use it:
+    - Called internally by `semantically_chunk_documents` before processing all
+      documents. Raises a clear ImportError if sentence-transformers is absent.
+
+    High-level approach:
+    - Try to create both model and tokenizer; gracefully degrade tokenizer to
+      None if it cannot be instantiated for the chosen model.
     """
     if SentenceTransformer is None:
         raise ImportError("sentence-transformers is required for semantic chunking")
@@ -150,14 +161,21 @@ def _load_models(model_name: str):
 def _count_tokens(text: str, tokenizer=None) -> int:
     """Count tokens using the provided tokenizer; fall back to word count.
 
-    Why this exists: RAG retrievers often have budgeted context size; keeping
-    chunks within `max_tokens` improves retrieval quality and reduces model
-    truncation.
+    What this function provides:
+    - An approximate token count for a text using a tokenizer when available,
+      or a fallback word-based estimate.
 
-    Where it fits: Used during greedy chunk growth to decide when to flush the
-    current chunk and start a new one.
+    Why token counting:
+    - Enforces min/max token constraints for chunks to improve retrieval and
+      avoid excessive model truncation.
 
-    We avoid adding special tokens to approximate content length constraints.
+    How it behaves:
+    - If tokenizer is None, returns max(1, word_count). Otherwise uses the
+      tokenizer.encode(..., add_special_tokens=False) length.
+
+    High-level approach:
+    - Provides a pragmatic, dependency-tolerant token length estimation used by
+      the greedy chunk growth algorithm.
     """
     if tokenizer is None or not text:
         return max(1, int(len(text.split())))
@@ -175,19 +193,28 @@ def _semantic_chunk_text(
 ) -> List[Dict[str, Any]]:
     """Greedy semantic chunking within token bounds.
 
-    Why this exists: This is the core algorithm that groups adjacent sentences
-    into semantically consistent chunks sized for retrieval.
+    What this function provides:
+    - Groups adjacent sentences into semantically coherent chunks while
+      respecting token-based size bounds and optional sentence overlap.
 
-    Where it fits: Called per document by `semantically_chunk_documents`; its
-    output is then wrapped back into LangChain `Document` objects for downstream
-    use.
+    Why use this algorithm:
+    - Produces chunks that keep related sentences together, improving retrieval
+      relevance versus fixed-size chopping.
 
-    - Keep adding the next sentence if it is similar to the running chunk
-      centroid OR the current chunk hasn't reached `min_tokens`.
-    - Flush when adding would exceed `max_tokens` or when similarity drops
-      below `similarity_threshold` after `min_tokens` is satisfied.
-    - Maintain an optional sentence overlap to improve retrieval recall.
-    Returns a list of dictionaries that carry chunk text, positions and size.
+    How to use it:
+    - Called per-document by `semantically_chunk_documents`. Parameters mirror
+      common splitter knobs (min/max tokens, similarity threshold, overlap).
+
+    High-level approach:
+    - Split text into sentences, compute normalized sentence embeddings, then
+      greedily grow a chunk by adding the next sentence if similarity to the
+      running centroid is above threshold or the chunk hasn't reached
+      `min_tokens`.
+    - Flush the chunk when adding would exceed `max_tokens` or similarity drops
+      (and `min_tokens` is satisfied). Optionally carry an overlap of the last
+      sentences into the next chunk to boost recall.
+    - Returns a list of dicts containing chunk text, sentence indices, char
+      span, and token count for each chunk.
     """
     sentences = _split_sentences(text)
     if not sentences:
@@ -283,17 +310,22 @@ def semantically_chunk_documents(
 ) -> List[Document]:
     """Replace RecursiveCharacterTextSplitter with semantic chunking.
 
-    Why this exists: Provides a plug-and-play API that mirrors the recursive
-    splitter entry point, so you can swap implementations with minimal code
-    changes while gaining semantic chunking benefits.
+    What this function provides:
+    - A drop-in replacement for RecursiveCharacterTextSplitter.split_documents
+      that returns chunked Document objects with provenance metadata.
 
-    Where it fits: Use directly where you currently call
-    `text_splitter.split_documents(docs)`. It takes the same `docs` input and
-    returns a list of chunked `Document`s.
+    Why use this function:
+    - Keeps the same inputs/outputs as the recursive splitter so downstream
+      code remains unchanged while gaining semantic chunking.
 
-    Parameters mirror typical splitter knobs for easy substitution.
-    Returns a list of LangChain `Document` chunks that preserve the original
-    metadata and add `start_index`, `end_index`, and `token_count`.
+    How to use it:
+    - Call with a list of Documents. The function loads models once, chunks
+      each document semantically, and returns new Document objects preserving
+      original metadata plus `start_index`, `end_index`, and `token_count`.
+
+    High-level approach:
+    - Load embedding and tokenizer, run the per-document semantic chunker, and
+      wrap chunk dicts back into Document instances with augmented metadata.
     """
     emb_model, tokenizer = _load_models(model_name)
     out: List[Document] = []
@@ -315,7 +347,7 @@ def semantically_chunk_documents(
             if p.get("start_char") is not None:
                 md["start_index"] = int(p["start_char"])  # start offset within source doc
             if p.get("end_char") is not None:
-                md["end_index"] = int(p["end_char"])  # end offset (convenience)
+                md["end_index"] = int(p["end_char"])  # end offset
             md["token_count"] = int(p.get("token_count", 0))
             out.append(Document(page_content=p["text"], metadata=md))
     return out
@@ -324,15 +356,15 @@ def semantically_chunk_documents(
 # === DataFrame and clustering utilities ===
 
 try:  # Optional; enables density-based clustering without choosing k
-    import hdbscan  # type: ignore
-except Exception:  # pragma: no cover
-    hdbscan = None  # type: ignore
+    import hdbscan
+except Exception:
+    hdbscan = None
 
 try:
     # Fallback clustering if HDBSCAN is unavailable
     from sklearn.cluster import AgglomerativeClustering
-except Exception:  # pragma: no cover
-    AgglomerativeClustering = None  # type: ignore
+except Exception:
+    AgglomerativeClustering = None
 
 
 def chunks_to_df(
@@ -342,21 +374,23 @@ def chunks_to_df(
 ) -> pd.DataFrame:
     """Create a DataFrame with chunk text, lengths, and embeddings.
 
-    Why this exists: You often want to audit, visualize, or cluster chunks to
-    verify semantic cohesion and tune chunking parameters. A tabular view with
-    embeddings is a convenient starting point for such analysis.
+    What this function provides:
+    - A pandas DataFrame containing chunk text, lengths, embeddings, and
+      preserved metadata for downstream analysis or clustering.
 
-    Where it fits: Use immediately after chunking (e.g., the output of
-    `semantically_chunk_documents`). You can pass this DataFrame to
-    `cluster_chunks_df` to group similar-context chunks.
+    Why use this:
+    - Useful for auditing chunk quality, visualizing embeddings, and feeding
+      clustering or evaluation pipelines.
 
-    Columns produced:
-    - chunk_id: derived from metadata where possible, else an index.
-    - text: chunk content.
-    - char_len: character length of the chunk.
-    - token_len: token length (approximate if tokenizer not available).
-    - embedding: list[float] embedding vector for the chunk.
-    - metadata: original metadata dict, preserved for traceability.
+    How to use it:
+    - Pass the output of `semantically_chunk_documents`. The function computes
+      token/char lengths, batch-encodes chunk embeddings, and returns a DataFrame
+      with serializable embedding lists.
+
+    High-level approach:
+    - Load models, compute token/char lengths, batch-encode texts (with optional
+      normalization), and assemble a DataFrame including chunk IDs derived from
+    metadata when possible.
     """
     emb_model, tokenizer = _load_models(model_name)
 
@@ -412,20 +446,23 @@ def cluster_chunks_df(
 ) -> pd.DataFrame:
     """Cluster chunks by semantic similarity and return df with `cluster_id`.
 
-    Why this exists: To discover groups of semantically similar chunks so you
-    can sample evaluation questions that require synthesis across multiple
-    places in the corpus, or to detect redundancy.
+    What this function provides:
+    - Groups semantically similar chunks and annotates the DataFrame with a
+      `cluster_id` column, filtering out noise and undersized clusters.
 
-    Where it fits: Use right after `chunks_to_df`. The result can be filtered
-    to clusters (>=2 items) and then consumed by your QA generation scripts.
+    Why use clustering:
+    - Helps discover redundancy, related content, and clusters suitable for
+      multi-source evaluation question generation.
 
-    Behavior:
-    - Default uses HDBSCAN (if installed) for density-based clustering with
-      variable cluster counts and `min_cluster_size` control.
-    - Falls back to Agglomerative Clustering if HDBSCAN is unavailable. You
-      may set `distance_threshold` or `n_clusters` for the fallback.
-    - Filters clusters to ensure each has at least 2 items and, if enabled,
-      at least two distinct lengths differing by `min_length_diff` tokens.
+    How to use it:
+    - Supply a DataFrame produced by `chunks_to_df` that contains an
+      'embedding' column. Choose `method='hdbscan'` when available for density
+      clustering, or fall back to AgglomerativeClustering.
+
+    High-level approach:
+    - Stack embeddings into X, run the selected clustering algorithm, attach
+      labels, filter noise/singletons, and optionally enforce token-length
+      diversity within clusters before returning the concatenated results.
     """
     if "embedding" not in df.columns:
         raise ValueError("DataFrame must contain an 'embedding' column.")

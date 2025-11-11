@@ -1,17 +1,21 @@
 # AI Evaluation Framework
- Vero is a comprehensive platform for the evaluation and continuous monitoring of AI pipelines, ensuring optimal performance and enterprise-grade reliability. It empowers developers and teams to transform uncertainty into confidence by providing a straightforward, four-step process to evaluate, monitor, and gain unparalleled confidence in their AI pipelines.
+
+Vero is a comprehensive platform for the evaluation and continuous monitoring of AI pipelines, ensuring optimal performance and enterprise-grade reliability. It empowers developers and teams to transform uncertainty into confidence by providing a straightforward, four-step process to evaluate, monitor, and gain unparalleled confidence in their AI pipelines.
 
 ## Key Features:
-* **Trace & Log Execution**: Each query runs through the RAG pipeline is logged into an SQLite database, capturing the user query, retrieved context, reranked items, and the model’s output.
-* **Component-level Metrics**: Evaluate intermediate pipeline stages using metrics like Precision, Recall, Sufficiency, Citation, Overlap, and Ranking metrics (e.g. MRR, MAP, NDCG).
-* **Generation Metrics**: Measure semantic, factual, and alignment quality of generated outputs using metrics such as BERTScore, ROUGE, SEMScore, AlignScore, BLEURT, and G-Eval.
-* **Modular & Extensible**: Easily plug in new metric classes or custom scoring logic; the framework is designed to grow with your needs.
-* **End-to-End Evaluation**: Combine component metrics to understand the holistic performance of your RAG system — not just individual parts.
+
+- **Trace & Log Execution**: Each query runs through the RAG pipeline is logged into an SQLite database, capturing the user query, retrieved context, reranked items, and the model’s output.
+- **Component-level Metrics**: Evaluate intermediate pipeline stages using metrics like Precision, Recall, Sufficiency, Citation, Overlap, and Ranking metrics (e.g. MRR, MAP, NDCG).
+- **Generation Metrics**: Measure semantic, factual, and alignment quality of generated outputs using metrics such as BERTScore, ROUGE, SEMScore, AlignScore, BLEURT, and G-Eval.
+- **Modular & Extensible**: Easily plug in new metric classes or custom scoring logic; the framework is designed to grow with your needs.
+- **End-to-End Evaluation**: Combine component metrics to understand the holistic performance of your RAG system — not just individual parts.
 
 ## Flowchart
+
 ![flowchart.png](docs/flowchart.png)
 
 ## Project Structure
+
 ```
 .
 ├── src/
@@ -27,13 +31,17 @@
 ```
 
 ## Getting Started
+
 ### Setup
+
 Install via pip (recommended inside a virtualenv):
+
 ```py
 pip install vero-eval
 ```
 
 ### Example Usage
+
 ```py
 from vero.rag import SimpleRAGPipeline
 from vero.trace import TraceDB
@@ -56,27 +64,31 @@ print(results)
 
 The RAG Evaluation Framework supports three classes of metrics:
 
-* Generation Metrics — measure semantic/factual quality of answers.
-* Ranking Metrics — measure ranking quality of rerankers.
-* Retrieval Metrics — measure the quality and sufficiency of the retrieved context.
+- Generation Metrics — measure semantic/factual quality of answers.
+- Ranking Metrics — measure ranking quality of rerankers.
+- Retrieval Metrics — measure the quality and sufficiency of the retrieved context.
 
 # Evaluator
 
 ## **Overview**
+
 - The Evaluator is a convenience wrapper to run multiple metrics over model outputs and retrieval results.
 - It orchestrates generation evaluation (text-generation metrics), retrieval evaluation (precision/recall/sufficiency), and reranker evaluation (NDCG, MAP, MRR). It produces CSV summaries by default.
 
 > Quick notes
+>
 > - The Evaluator uses project metric classes (e.g., BartScore, BertScore, RougeScore, SemScore, PrecisionScore, RecallScore, MeanAP, MeanRR, RerankerNDCG, CumulativeNDCG, etc.). These metrics are in vero.metrics and are referenced internally.
 > - Many methods expect particular CSV column names (see "Expected CSV schemas").
 
 ### Steps to evaluate your pipeline
 
-**Step 1 - Generation evaluation** 
+**Step 1 - Generation evaluation**
+
 - Input: a CSV with "Context Retrieved" and "Answer" columns.
 - Result: Generation_Scores.csv with columns such as SemScore, BertScore, RougeLScore, BARTScore, BLUERTScore, G-Eval (Faithfulness).
 
 Example:
+
 ```py
 from vero.evaluator.evaluator import Evaluator
 
@@ -87,9 +99,11 @@ print(df_scores.head())
 ```
 
 **Step 2 - Preparing reranker inputs (parse ground truth + retriever output)**
+
 - Use parse_retriever_data to convert ground-truth chunk ids and retriever outputs into a ranked_chunks_data.csv suitable for reranker evaluation.
 
 Example:
+
 ```py
 from vero.evaluator.evaluator import Evaluator
 
@@ -103,14 +117,15 @@ evaluator.parse_retriever_data(
 # This will produce 'ranked_chunks_data.csv'
 ```
 
-
 **Step 3 - Retrieval evaluation (precision, recall, sufficiency)**
+
 - Inputs:
   - retriever_data_path: a CSV that contains 'Retrieved Chunk IDs' and 'True Chunk IDs' columns (lists or strings).
   - data_path: the generation CSV with 'Context Retrieved' and 'Question' (for sufficiency).
 - Result: Retrieval_Scores.csv
 
 Example:
+
 ```py
 from vero.evaluator.evaluator import Evaluator
 
@@ -124,6 +139,7 @@ print(df_retrieval_scores.head())
 
 **Step 4 - Reranker evaluation (MAP, MRR, NDCG)**
 Example:
+
 ```py
 from vero.evaluator.evaluator import Evaluator
 
@@ -135,9 +151,10 @@ df_reranker_scores = evaluator.evaluate_reranker(
 print(df_reranker_scores)
 ```
 
-
 #### Lower-level metric usage
+
 To run a single metric directly you can instantiate the metric class. For example, to compute BARTScore or BertScore per pair:
+
 ```py
 from vero.metrics import BartScore, BertScore
 
@@ -151,30 +168,33 @@ with BertScore() as bert:
 # Test Dataset Generation
 
 ## **Overview**
-- The Test Dataset Generation module creates high-quality question-answer pairs derived from your document collection. It generates challenging queries designed to reveal retrieval and reasoning failures in RAG systems (e.g., boundary synthesis, chunk-length bias, intent understanding).
+
+- The Test Dataset Generation module creates high-quality question-answer pairs derived from your document collection. It generates challenging queries designed to reveal retrieval and reasoning failures in RAG systems, and considering edge-case user personas.
 - Internally it chunks documents, clusters related chunks, and uses an LLM to produce QA items with ground-truth chunk IDs and metadata.
 
-
 ### **Example**
+
 ```py
 from vero.test_dataset_generator import generate_and_save
 
-# Generate 40 queries from PDFs stored in ./data/pdfs and save as test_dataset.csv
+# Generate 100 queries from PDFs stored in ./data/pdfs directory and save outputs in test_dataset directory
 generate_and_save(
-    data_path='./data/pdfs',
+    data_path='./data/pdfs/',
     usecase='Vitamin chatbot catering to general users for their daily queries',
-    save_path='test_dataset.csv',
-    n_queries=40
+    save_path='test_dataset',
+    n_queries=100
 )
 ```
 
 # Report Generation
 
 ## Overview
+
 - The Report Generation module consolidates evaluation outputs from generation, retrieval, and reranking into a final report.
 - It orchestrates a stateful workflow that processes CSV results from various evaluators and synthesizes comprehensive insights and recommendations.
 
 ## Example Usage
+
 ```py
 from vero.report_generation_workflow import ReportGenerator
 
