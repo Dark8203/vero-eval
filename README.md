@@ -1,8 +1,27 @@
-# AI Evaluation Framework
+# Vero
 
-Vero is a comprehensive platform for the evaluation and continuous monitoring of AI pipelines, ensuring optimal performance and enterprise-grade reliability. It empowers developers and teams to transform uncertainty into confidence by providing a straightforward, four-step process to evaluate, monitor, and gain unparalleled confidence in their AI pipelines.
+<p align="center">
+  <a href="https://discord.gg/KeJeuzZm">
+    <img src="https://img.shields.io/badge/Discord-Join%20Server-5865F2?logo=discord&logoColor=white" alt="Join our Discord">
+  </a>
+</p>
 
-## Key Features:
+**Vero** is an open platform for evaluating and continuously monitoring AI pipelines with real-world rigor. It goes beyond standard benchmarking by generating **edge-case user personas** and **stress-testing** models across challenging scenarios, helping teams identify risks early and build more reliable AI systems.
+
+# Index
+
+- [Key Features](#key-features)
+- [Flowchart](#flowchart)
+- [Project Structure](#project-structure)
+- [Getting Started](#getting-started)
+- [Metrics Overview](#metrics-overview)
+- [Evaluator](#evaluator)
+- [Test Dataset Generation](#test-dataset-generation)
+- [Report Generation](#report-generation)
+
+<br>
+
+# Key Features
 
 - **Trace & Log Execution**: Each query runs through the RAG pipeline is logged into an SQLite database, capturing the user query, retrieved context, reranked items, and the model’s output.
 - **Component-level Metrics**: Evaluate intermediate pipeline stages using metrics like Precision, Recall, Sufficiency, Citation, Overlap, and Ranking metrics (e.g. MRR, MAP, NDCG).
@@ -10,11 +29,11 @@ Vero is a comprehensive platform for the evaluation and continuous monitoring of
 - **Modular & Extensible**: Easily plug in new metric classes or custom scoring logic; the framework is designed to grow with your needs.
 - **End-to-End Evaluation**: Combine component metrics to understand the holistic performance of your RAG system — not just individual parts.
 
-## Flowchart
+# Flowchart
 
 ![flowchart.png](docs/flowchart.png)
 
-## Project Structure
+# Project Structure
 
 ```
 .
@@ -30,7 +49,7 @@ Vero is a comprehensive platform for the evaluation and continuous monitoring of
 
 ```
 
-## Getting Started
+# Getting Started
 
 ### Setup
 
