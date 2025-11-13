@@ -10,7 +10,7 @@ from langchain_openai import ChatOpenAI
 from .agent_prompts import *
 from langchain_community.document_loaders import CSVLoader
 
-api_key = os.getenv('OPENAI_API_KEY')
+openai_api_key = os.getenv('OPENAI_API_KEY')
 
 print('Report Starting')
 def merge_dicts(dict1, dict2):
