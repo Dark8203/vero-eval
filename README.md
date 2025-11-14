@@ -34,8 +34,7 @@ It goes beyond standard benchmarking by understanding your business use-case to 
 - **End-to-End Evaluation**: Combine component metrics to understand the holistic performance of your RAG system — not just individual parts.
 
 # Flowchart
-
-![flowchart.png](docs/flowchart.png)
+![flowchart(v2).png](docs/flowchart%28v2%29.png)
 
 # Project Structure
 
@@ -102,6 +101,7 @@ The RAG Evaluation Framework supports three classes of metrics:
 >
 > - The Evaluator uses project metric classes (e.g., BartScore, BertScore, RougeScore, SemScore, PrecisionScore, RecallScore, MeanAP, MeanRR, RerankerNDCG, CumulativeNDCG, etc.). These metrics are in vero.metrics and are referenced internally.
 > - Many methods expect particular CSV column names (see "Expected CSV schemas").
+> - We highly recommend to install **gpu version** of torch library.
 
 ### Steps to evaluate your pipeline
 
@@ -113,7 +113,7 @@ The RAG Evaluation Framework supports three classes of metrics:
 Example:
 
 ```py
-from vero.evaluator.evaluator import Evaluator
+from vero.evaluator import Evaluator
 
 evaluator = Evaluator()
 # data_path must point to a CSV with columns "Context Retrieved" and "Answer"
@@ -128,7 +128,7 @@ print(df_scores.head())
 Example:
 
 ```py
-from vero.evaluator.evaluator import Evaluator
+from vero.evaluator import Evaluator
 
 evaluator = Evaluator()
 # ground_truth_path: dataset with 'Chunk IDs' and 'Less Relevant Chunk IDs' columns
@@ -150,7 +150,7 @@ evaluator.parse_retriever_data(
 Example:
 
 ```py
-from vero.evaluator.evaluator import Evaluator
+from vero.evaluator import Evaluator
 
 evaluator = Evaluator()
 df_retrieval_scores = evaluator.evaluate_retrieval(
@@ -204,7 +204,7 @@ from vero.test_dataset_generator import generate_and_save
 generate_and_save(
     data_path='./data/pdfs/',
     usecase='Vitamin chatbot catering to general users for their daily queries',
-    save_path='test_dataset',
+    save_path_dir='test_dataset',
     n_queries=100
 )
 ```

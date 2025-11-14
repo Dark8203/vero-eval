@@ -29,20 +29,20 @@ import pandas as pd
 try:
     # Small, fast embedding model family suitable for local semantic grouping
     from sentence_transformers import SentenceTransformer
-except Exception as e:
+except Exception as e:  
     SentenceTransformer = None
 
 try:
     # Used only for token length accounting; falls back to whitespace tokens if unavailable
     from transformers import AutoTokenizer
-except Exception:
+except Exception: 
     AutoTokenizer = None
 
 try:
     # LangChain core Document (compatible with .model_dump() in recent versions)
     from langchain_core.documents import Document
-except Exception:
-    class Document:
+except Exception: 
+    class Document: 
         def __init__(self, page_content: str, metadata: Optional[Dict[str, Any]] = None):
             self.page_content = page_content
             self.metadata = metadata or {}
