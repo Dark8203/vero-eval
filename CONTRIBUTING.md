@@ -34,13 +34,15 @@ We follow the **Fork → Branch → Pull Request (PR)** workflow (visual guide [
 
 ## 🪶 Documentation Improvements
 
-Docs live under the **/docs** directory. We use Markdown for static pages.
+Docs live on the **docs branch** under **/docs** directory. We use Markdown for static pages.
 
 You can contribute by:
 
 - Fixing typos or improving explanations.
 - Adding usage examples.
 - Writing how-to guides or tutorials.
+
+> To update the docs, create a branch from `docs`, make your changes, and open a PR against the `docs` branch.
 
 ---
 

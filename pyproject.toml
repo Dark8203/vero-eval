@@ -5,7 +5,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "vero-eval"
-version = "0.0.1.4"
+version = "0.0.1.5"
 maintainers = [
   { name="Vishal Srivastava", email="vishalsrivastava8203@gmail.com" },
     { name="Alakh Agrawal", email="alakhagr@gmail.com" }
@@ -17,7 +17,7 @@ classifiers = [
     "Programming Language :: Python :: 3",
     "Operating System :: OS Independent",
 ]
-license = "MIT"
+license = "Apache-2.0"
 license-files = ["LICEN[CS]E*"]
 dependencies = ["torch",
     "pandas",
