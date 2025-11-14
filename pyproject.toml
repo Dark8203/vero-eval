@@ -46,7 +46,7 @@ dependencies = ["torch",
 ]
 
 [project.urls]
-repository = "https://github.com/vero-eval/vero-eval.git"
+repository = "https://github.com/vero-labs-ai/vero-eval.git"
 homepage = "https://vero.co.in"
 
 [tool.hatch.build.targets.wheel]
