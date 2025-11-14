@@ -21,7 +21,7 @@ title: Evaluator
 
 Example:
 ```py
-from vero.evaluator.evaluator import Evaluator
+from vero.evaluator import Evaluator
 
 evaluator = Evaluator()
 # data_path must point to a CSV with columns "Context Retrieved" and "Answer"
@@ -34,7 +34,7 @@ print(df_scores.head())
 
 Example:
 ```py
-from vero.evaluator.evaluator import Evaluator
+from vero.evaluator import Evaluator
 
 evaluator = Evaluator()
 # ground_truth_path: dataset with 'Chunk IDs' and 'Less Relevant Chunk IDs' columns
@@ -55,7 +55,7 @@ evaluator.parse_retriever_data(
 
 Example:
 ```py
-from vero.evaluator.evaluator import Evaluator
+from vero.evaluator import Evaluator
 
 evaluator = Evaluator()
 df_retrieval_scores = evaluator.evaluate_retrieval(
@@ -68,7 +68,7 @@ print(df_retrieval_scores.head())
 **Step 4 - Reranker evaluation (MAP, MRR, NDCG)**
 Example:
 ```py
-from vero.evaluator.evaluator import Evaluator
+from vero.evaluator import Evaluator
 
 evaluator = Evaluator()
 df_reranker_scores = evaluator.evaluate_reranker(
