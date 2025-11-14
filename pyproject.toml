@@ -37,7 +37,13 @@ dependencies = ["torch",
     "spacy",
     "pytorch-lightning",
     "scikit-learn",
-    "protobuf",]
+    "protobuf",
+    "fastapi",
+    "apscheduler",
+    "pypdf",
+    "hf_xet",
+    "sentence-transformers"
+]
 
 [project.urls]
 repository = "https://github.com/vero-eval/vero-eval.git"

@@ -94,7 +94,16 @@ class Evaluator:
         def extract_page_content(text_blob):
             pattern = r"page_content='(.*?)'"
             matches = re.findall(pattern, text_blob)
-            return matches
+            if matches:
+                return matches
+
+            if text_blob[0] == '[':
+                matches = ast.literal_eval(text_blob)
+                return matches
+
+            else:
+                matches = str(text_blob)
+                return matches
 
         df = pd.read_csv(data_path)
         reference_list = df['Context Retrieved'].apply(extract_page_content).tolist()
@@ -244,7 +253,16 @@ class Evaluator:
         def extract_page_content(text_blob):
             pattern = r"page_content='(.*?)'"
             matches = re.findall(pattern, text_blob)
-            return matches
+            if matches:
+                return matches
+
+            if text_blob[0] == '[':
+                matches = ast.literal_eval(text_blob)
+                return matches
+
+            else:
+                matches = str(text_blob)
+                return matches
 
         df_new = pd.read_csv(data_path)
         contexts = df_new['Context Retrieved'].apply(extract_page_content).tolist()
@@ -272,7 +290,7 @@ class Evaluator:
         #
 
         #
-        # # TODO: Figure this fuck out
+        # # TODO: Figure AlignScore out
         #
         # print("Processing AlignScore...")
         # with AlignScore() as align:

@@ -25,7 +25,7 @@ from vero.evaluator.evaluator import Evaluator
 
 evaluator = Evaluator()
 # data_path must point to a CSV with columns "Context Retrieved" and "Answer"
-df_scores = evaluator.evaluate_generation(data_path='testing.csv')
+df_scores = evaluator.evaluate_generation(data_path='testingv2.csv')
 print(df_scores.head())
 ```
 
@@ -41,7 +41,7 @@ evaluator = Evaluator()
 # data_path: retriever output with 'Context Retrieved' containing "id='...'"
 evaluator.parse_retriever_data(
     ground_truth_path='test_dataset_generator.csv',
-    data_path='testing.csv'
+    data_path='testingv2.csv'
 )
 # This will produce 'ranked_chunks_data.csv'
 ```
@@ -59,7 +59,7 @@ from vero.evaluator.evaluator import Evaluator
 
 evaluator = Evaluator()
 df_retrieval_scores = evaluator.evaluate_retrieval(
-    data_path='testing.csv',
+    data_path='testingv2.csv',
     retriever_data_path='ranked_chunks_data.csv'
 )
 print(df_retrieval_scores.head())

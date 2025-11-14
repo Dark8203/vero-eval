@@ -7,10 +7,12 @@ load_dotenv(find_dotenv())
 from langchain_core.prompts import PromptTemplate
 from langgraph.graph import START, StateGraph, END
 from langchain_openai import ChatOpenAI
-from .agent_prompts import *
+from vero.report_generation_workflow.agent_prompts import *
 from langchain_community.document_loaders import CSVLoader
+from importlib.resources import files
 
 openai_api_key = os.getenv('OPENAI_API_KEY')
+
 
 print('Report Starting')
 def merge_dicts(dict1, dict2):
@@ -37,7 +39,8 @@ class ReportGenerator:
 
         with open(pipe_config_data, 'r') as json_file:
             pipeline_configuration = json.load(json_file)
-        with open('vero/report_generation_workflow/report_data/metrics_definition.json', 'r') as json_file:
+        data_path = files('vero.report_generation_workflow.report_data')/'metrics_definition.json'
+        with data_path.open('r') as json_file:
             metrics_definition = json.load(json_file)
 
         loader = CSVLoader(file_path=retrieval_scores_path)
@@ -75,8 +78,8 @@ class ReportGenerator:
 
             # retriever_evaluation_results = json.loads(state['data']['parser_agent'])['retriever_evaluation_results']
 
-
-            with open('vero/report_generation_workflow/report_data/retriever_heuristics.json', 'r') as json_file:
+            data_path = files('vero.report_generation_workflow.report_data') / 'retriever_heuristics.json'
+            with data_path.open('r') as json_file:
                 retriever_heuristics = json.load(json_file)
 
             messages = prompt.invoke({'retriever_evaluation_results':retriever_evaluation_results,'metrics_definitions':metrics_definition,'heuristics':retriever_heuristics})
@@ -92,8 +95,8 @@ class ReportGenerator:
             # generation_evaluation_results = json.loads(state['data']['parser_agent'])['generation_evaluation_results']
             # generation_evaluation_results = pd.read_csv('Scores_with_remarks.csv')
 
-
-            with open('vero/report_generation_workflow/report_data/generator_heuristics.json', 'r') as json_file:
+            data_path = files('vero.report_generation_workflow.report_data') / 'generator_heuristics.json'
+            with data_path.open('r') as json_file:
                 generator_heuristics = json.load(json_file)
 
             messages = prompt.invoke(
@@ -108,8 +111,8 @@ class ReportGenerator:
 
             # reranker_evaluation_results = json.loads(state['data']['parser_agent'])['reranker_evaluation_results']
 
-
-            with open('vero/report_generation_workflow/report_data/retriever_heuristics.json', 'r') as json_file:
+            data_path = files('vero.report_generation_workflow.report_data') / 'reranker_heuristics.json'
+            with data_path.open('r') as json_file:
                 reranker_heuristics = json.load(json_file)
 
             messages = prompt.invoke(
@@ -210,7 +213,7 @@ class ReportGenerator:
         result = graph.invoke(initial_state)
         print(result)
 
-        with open('report.md','w') as f:
+        with open('report.md','w', encoding='utf-8') as f:
             f.write(result['data']['report_generation_agent'])
             f.close()
 

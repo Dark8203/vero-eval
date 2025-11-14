@@ -31,9 +31,9 @@ load_dotenv(find_dotenv())
 
 client = OpenAI()
 
-import chunking_utilities
+from vero.test_dataset_generator import chunking_utilities
 
-from prompts import system_prompt_basic, system_prompt_chunk_boundary, system_prompt_chunk_length, \
+from vero.test_dataset_generator.prompts import system_prompt_basic, system_prompt_chunk_boundary, system_prompt_chunk_length, \
     system_prompt_query_intent, user_prompt_chunks, system_prompt_persona_generation, \
         user_prompt_personas, system_prompt_persona_specific_QA
 
@@ -645,7 +645,7 @@ def generate_and_save(data_path, usecase = None, save_path_dir='test_dataset', n
     - The persona generation step executes only if `usecase` is provided.
     - The function dynamically balances generation volume across five QA types to achieve variety and coverage.
     """
-    os.makedir(save_path_dir, exist_ok=True)
+    os.makedirs(save_path_dir, exist_ok=True)
     loader = DirectoryLoader(data_path, glob = '*.pdf', loader_cls = PyPDFLoader)
     docs = loader.load()
     
