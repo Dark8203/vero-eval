@@ -6,7 +6,11 @@
   </a>
 </p>
 
-**Vero** is an open platform for evaluating and continuously monitoring AI pipelines with real-world rigor. It goes beyond standard benchmarking by generating **edge-case user personas** and **stress-testing** models across challenging scenarios, helping teams identify risks early and build more reliable AI systems.
+**Vero** is an open platform for evaluating and monitoring AI pipelines with real-world rigor.
+<br>
+It goes beyond standard benchmarking by understanding your business use-case to generate edge-case **user personas** and **stress-test** your Agent across challenging scenarios, help identify risks and build highly reliable AI systems.
+
+> Most eval tools say "You're broken". Vero tells you where, and how to fix it
 
 # Index
 
