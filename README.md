@@ -12,6 +12,8 @@ It goes beyond standard benchmarking by understanding your business use-case to 
 
 > Most eval tools say "You're broken". Vero tells you where, and how to fix it
 
+> ⭐ If you find this project helpful, consider giving it a star. It genuinely helps the project grow and encourages us to keep improving.
+
 # Index
 
 - [Key Features](#key-features)
@@ -34,6 +36,7 @@ It goes beyond standard benchmarking by understanding your business use-case to 
 - **End-to-End Evaluation**: Combine component metrics to understand the holistic performance of your RAG system — not just individual parts.
 
 # Flowchart
+
 ![flowchart(v2).png](docs/flowchart%28v2%29.png)
 
 # Project Structure
