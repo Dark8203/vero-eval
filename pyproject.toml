@@ -42,7 +42,8 @@ dependencies = ["torch",
     "apscheduler",
     "pypdf",
     "hf_xet",
-    "sentence-transformers"
+    "sentence-transformers",
+    "pyyaml"
 ]
 
 [project.urls]
