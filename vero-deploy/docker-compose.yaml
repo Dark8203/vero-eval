@@ -1,0 +1,32 @@
+x-base-config: &base-config
+  image: crimsonceres/demo-test
+  environment:
+    - HF_HOME=/root/.cache/huggingface
+    - TRANSFORMERS_CACHE=/root/.cache/huggingface/transformers
+    - OPENAI_API_KEY=
+  volumes:
+    - ~/.cache/huggingface:/root/.cache/huggingface
+    - ~/.cache/huggingface/transformers:/root/.cache/huggingface/transformers
+    - ./data:/app/data
+    - ./config.yaml:/vero-deploy/config.yaml
+
+
+services:
+  evaluation-runner-cpu:
+    <<: *base-config
+    container_name: my_eval_app_cpu
+
+  evaluation-runner-gpu:
+    <<: *base-config
+    container_name: my_eval_app_gpu
+    profiles: ["gpu"]
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+
+
+
