@@ -2,8 +2,13 @@ FROM pytorch/pytorch:2.9.0-cuda12.8-cudnn9-devel
 
 WORKDIR /app
 
-COPY .. .
-RUN pip install uv
-RUN uv pip install vero-eval
+ENV HF_HOME=/root/.cache/huggingface
+ENV TRANSFORMERS_CACHE=/root/.cache/huggingface/transformers
 
-CMD ["uv","run","evaluator.py"]
+RUN pip install uv
+RUN uv venv \
+    && uv pip install vero-eval \
+    && uv pip install pyyaml
+COPY . .
+
+CMD ["uv","run","run_eval_pipeline.py"]
