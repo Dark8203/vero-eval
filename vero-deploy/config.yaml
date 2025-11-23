@@ -1,0 +1,5 @@
+ground_truth_file_path: "data/inputs/ground_truth.csv"
+input_file_path: "data/inputs/input.csv"
+generation_output_file_path: "data/outputs/Generation_Scores.csv"
+retriever_output_file_path: "data/outputs/Retriever_Scores.csv"
+reranker_output_file_path: "data/outputs/Reranker_Scores.csv"

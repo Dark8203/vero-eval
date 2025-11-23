@@ -24,6 +24,7 @@ It goes beyond standard benchmarking by understanding your business use-case to 
 - [Evaluator](#evaluator)
 - [Test Dataset Generation](#test-dataset-generation)
 - [Report Generation](#report-generation)
+- [Containerised evaluation (Docker)](#containerised-evaluation-docker)
 
 <br>
 
@@ -51,7 +52,18 @@ It goes beyond standard benchmarking by understanding your business use-case to 
 |   │   ├── metrics/          # Main package for metrics
 |   └── └──  all the metrics  # All the metrics are in here
 └── tests/
-    └── test_main.py/         # file for all the testing
+│   └── test_main.py/         # file for all the testing
+└── docker/
+│   ├── run_eval_pipeline.py  # script to run the evaluation pipeline
+│   └── Dockerfile/           # dockerfile for building the image    
+└── vero-deploy/
+│   ├── data/                 # folder for input and output data
+│   │   ├── inputs            # folder for input data
+│   │   │   ├── input.csv     # example input csv file
+│   │   │   └── ground_truth.csv # example ground truth csv file
+│   │   └── outputs           # folder for output data
+│   ├── config.yaml           # yaml file for configuration
+└── └── docker-compose.yaml   # docker compose file
 
 ```
 
@@ -237,3 +249,50 @@ report_generator.generate_report(
     'Reranked_Scores.csv'
 )
 ```
+
+
+# Containerised evaluation (Docker)
+
+## Prequisites
+- Install [Docker](https://docs.docker.com/get-docker/) and [Docker Compose](https://docs.docker.com/compose/install/).
+- Disk spcae >= 50 GB
+- CPU >= 4 cores (GPU recommended for faster metric computation)
+- RAM >= 8 GB
+
+**Step 1 - Clone the repository and switch to the deploy folder**
+```bash
+git clone https://github.com/vero-eval/vero-eval.git
+cd vero-deploy
+```
+
+**Step 2 - Inspect example inputs**
+- Open the `data/inputs` folder inside `vero-deploy`.
+- Review the example CSV provided (for example `data/inputs/input.csv`) and structure your input CSV the same way. Common column names used across the project include `Context Retrieved`, `Answer`, `Question`, `Retrieved Chunk IDs`, `True Chunk IDs`, `Chunk IDs`, and `Less Relevant Chunk IDs`.
+
+**Step-3 Configure the input filename**
+- Open `config.yaml` in the `vero-deploy` directory and check the key that references the input CSV filename. Update it to point to your CSV if needed (ensure the filename you pick matches the file in `data/inputs`).
+
+**Step-4 Set your OpenAI key in Docker Compose**
+- Open `docker-compose.yaml` and set the `OPEN_AI_KEY` environment variable for the evaluation service. Example snippet:
+```yaml
+x-base-config: &base-config
+  image: crimsonceres/demo-test
+  environment:
+    - HF_HOME=/root/.cache/huggingface
+    - TRANSFORMERS_CACHE=/root/.cache/huggingface/transformers
+    - OPENAI_API_KEY=
+```
+You can also use environment substitution (for example `OPEN_AI_KEY=${OPEN_AI_KEY}`) and export the variable in your shell before running Docker.
+
+**Step-5 Run the evaluation container**
+- If you have a GPU available (recommended):
+```bash
+docker compose run evaluation-runner-gpu
+```
+- If you are using CPU only:
+```bash
+docker compose run evaluation-runner-cpu
+```
+
+>That is all required to run a containerised evaluation. Ensure `data/inputs` contains the CSV referenced in `config.yaml` and that `docker-compose.yaml` has `OPEN_AI_KEY` set before running the appropriate `docker compose run` command.
+
