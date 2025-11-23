@@ -253,6 +253,12 @@ report_generator.generate_report(
 
 # Containerised evaluation (Docker)
 
+## Prequisites
+- Install [Docker](https://docs.docker.com/get-docker/) and [Docker Compose](https://docs.docker.com/compose/install/).
+- Disk spcae >= 50 GB
+- CPU >= 4 cores (GPU recommended for faster metric computation)
+- RAM >= 8 GB
+
 **Step 1 - Clone the repository and switch to the deploy folder**
 ```bash
 git clone https://github.com/vero-eval/vero-eval.git
